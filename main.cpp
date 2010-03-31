@@ -37,20 +37,20 @@ void processEvents()
     }
 }
 
-const double velocity = 0.0001;
+const double velocity = 0.00001;
 
 double scaleX(int coord)
 {
-    const double centerX = -1;
-    double scale = 6 / (velocity * SDL_GetTicks() + 1);
+    const double centerX = 0.001643721971153;
+    double scale = 6 / (velocity * SDL_GetTicks() * SDL_GetTicks() + 1);
     
     return centerX + coord * scale / 400 - scale / 2;
 }
 
 double scaleY(int coord)
 {
-    const double centerY = 0.2;
-    double scale = 6 / (velocity * SDL_GetTicks() + 1);
+    const double centerY = 0.822467633298876;
+    double scale = 6 / (velocity * SDL_GetTicks() * SDL_GetTicks() + 1);
     return centerY - coord * scale / 400 + scale / 2;
 }
 
@@ -72,7 +72,7 @@ void draw(SDL_Surface *screen)
                 double y = y1;
 
                 int iteration = 0;
-                const int max_iteration = 32;
+                const int max_iteration = 64;
                 
                 while(x * x + y * y <= 2 * 2 && iteration < max_iteration) 
                 {
@@ -90,8 +90,11 @@ void draw(SDL_Surface *screen)
                 }
                 else
                 {
-                    Uint8 clr = 0xFF - (float)iteration / max_iteration * 0xFF;
-                    Uint32 color = SDL_MapRGB(screen->format, clr, clr, clr);
+                    
+                    Uint8 R = (float)iteration / max_iteration * 0xFF;
+                    Uint8 G = 0x88 + (float)iteration / max_iteration * 0xFF;
+                    Uint8 B = 0xFF - (float)iteration / max_iteration * 0xFF;
+                    Uint32 color = SDL_MapRGB(screen->format, R, G, B);
                     *pPixel = color;
                 }
             }
