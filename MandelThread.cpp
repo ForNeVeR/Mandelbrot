@@ -51,7 +51,7 @@ void MandelThread::work(MandelThread *this_mthread)
         {
             boost::this_thread::interruption_point();
         }
-        catch(boost::thread_interrupted &e)
+        catch(boost::thread_interrupted &)
         {
             this_mthread->workMutex->unlock();
             throw;
