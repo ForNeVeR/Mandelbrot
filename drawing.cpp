@@ -30,7 +30,7 @@ void draw_part(SDL_Surface *screen, int start_y, int end_y, double scale)
     int screen_size = SDL_min(screen->w, screen->h);
     for(int x0 = 0; x0 < screen->w; ++x0)
     {
-        for(int y0 = 0; y0 < screen->h; ++y0)
+        for(int y0 = start_y; y0 < end_y; ++y0)
         {
             Uint16 *pPixel = (Uint16 *)screen->pixels +
                 y0 * screen->pitch / 2 + x0;
