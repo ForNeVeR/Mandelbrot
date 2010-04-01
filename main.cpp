@@ -1,114 +1,75 @@
-#include <cstdio>
-#include "SDL.h"
+#include <iostream>
+#include <boost/thread/thread.hpp>
+#include <SDL.h>
 
+#include "drawing.h"
+#include "MandelThread.h"
+
+using namespace boost;
 using namespace std;
+
+const int VIDEO_X = 400;
+const int VIDEO_Y = 400;
 
 SDL_Surface *init()
 {
     if(SDL_Init(SDL_INIT_AUDIO|SDL_INIT_VIDEO) < 0)
     {
-        fprintf(stderr, "Unable to init SDL: %s\n", SDL_GetError());
+        cerr << "Unable to init SDL: " << SDL_GetError() << endl;
         exit(1);
     }
     atexit(SDL_Quit);
 
-    SDL_Surface *screen = SDL_SetVideoMode(400, 400, 16, SDL_SWSURFACE);
+    SDL_Surface *screen = SDL_SetVideoMode(VIDEO_X, VIDEO_Y, 16, SDL_SWSURFACE);
     if(screen == NULL)
     {
-        fprintf(stderr, "Unable to set 640x480 video: %s\n", SDL_GetError());
+        cerr << "Unable to set video mode: " << SDL_GetError() << endl;
         exit(1);
     }
 
     return screen;
 }
 
-void processEvents()
+void mainLoop(SDL_Surface *screen)
 {
-    SDL_Event event;
-
-    while(SDL_PollEvent(&event))
-    {
-        switch (event.type)
-        {
-        case SDL_QUIT:
-            exit(0);
-            break;
-        }
-    }
-}
-
-const double velocity = 0.00001;
-
-double scaleX(int coord)
-{
-    const double centerX = 0.001643721971153;
-    double scale = 6 / (velocity * SDL_GetTicks() * SDL_GetTicks() + 1);
+    int thread_count = thread::hardware_concurrency();
+    MandelThread *threads = new MandelThread[thread_count];
     
-    return centerX + coord * scale / 400 - scale / 2;
-}
-
-double scaleY(int coord)
-{
-    const double centerY = 0.822467633298876;
-    double scale = 6 / (velocity * SDL_GetTicks() * SDL_GetTicks() + 1);
-    return centerY - coord * scale / 400 + scale / 2;
-}
-
-void draw(SDL_Surface *screen)
-{
     for(;;)
     {
-        for(int x0 = 0; x0 < screen->w; ++x0)
+        // Process full screen through threads:
+        for(int i = 0; i < thread_count; ++i)
         {
-            for(int y0 = 0; y0 < screen->h; ++y0)
+            threads[i].start(screen, screen->h * i / thread_count,
+                screen->h * (i + 1) / thread_count, getScale());
+        }
+        for(int i = 0; i < thread_count; ++i)
+        {
+            threads[i].join();
+        }
+        
+        // Draw screen:
+        SDL_UpdateRect(screen, 0, 0, screen->w, screen->h);
+        
+        // Process events:
+        SDL_Event event;
+        while(SDL_PollEvent(&event))
+        {
+            switch (event.type)
             {
-                Uint16 *pPixel = (Uint16 *)screen->pixels +
-                    y0 * screen->pitch / 2 + x0;
-                
-                double x1 = scaleX(x0);
-                double y1 = scaleY(y0);
-
-                double x = x1;
-                double y = y1;
-
-                int iteration = 0;
-                const int max_iteration = 64;
-                
-                while(x * x + y * y <= 2 * 2 && iteration < max_iteration) 
-                {
-                    double xtemp = x * x - y * y + x1;
-                    double ytemp = 2 * x * y + y1;
-
-                    x = xtemp;
-                    y = ytemp;
-                    ++iteration;
-                }
-
-                if(iteration == max_iteration) 
-                {
-                    *pPixel = SDL_MapRGB(screen->format, 0, 0, 0);
-                }
-                else
-                {
-                    
-                    Uint8 R = (float)iteration / max_iteration * 0xFF;
-                    Uint8 G = 0x88 + (float)iteration / max_iteration * 0xFF;
-                    Uint8 B = 0xFF - (float)iteration / max_iteration * 0xFF;
-                    Uint32 color = SDL_MapRGB(screen->format, R, G, B);
-                    *pPixel = color;
-                }
+            case SDL_QUIT:
+                delete[] threads;
+                exit(0);
+                break;
             }
         }
-        SDL_UpdateRect(screen, 0, 0, screen->w, screen->h);
-
-        processEvents();
     }
 }
 
 int main(int argc, char *argv[])
 {
     SDL_Surface *screen = init();
-    draw(screen);    
+    mainLoop(screen);    
 
     return 0;
 }

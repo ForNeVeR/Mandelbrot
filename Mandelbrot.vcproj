@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="C:\Programs\SDL\include"
+				AdditionalIncludeDirectories="&quot;F:\X-Files\Projects\Lib\boost_1_42_0&quot;;C:\Programs\SDL\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -64,6 +64,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="c:\Programs\SDL\VisualC\SDL\Debug\SDL.lib c:\Programs\SDL\VisualC\SDLmain\Debug\SDLmain.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;F:\X-Files\Projects\Lib\boost_1_42_0\stage\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -118,7 +119,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="C:\Programs\SDL\include"
+				AdditionalIncludeDirectories="&quot;F:\X-Files\Projects\Lib\boost_1_42_0&quot;;C:\Programs\SDL\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -139,6 +140,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="c:\Programs\SDL\VisualC\SDL\Release\SDL.lib c:\Programs\SDL\VisualC\SDLmain\Release\SDLmain.lib"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;F:\X-Files\Projects\Lib\boost_1_42_0\stage\lib&quot;"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -178,7 +180,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\drawing.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MandelThread.cpp"
 				>
 			</File>
 		</Filter>
@@ -187,6 +197,14 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\drawing.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MandelThread.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
