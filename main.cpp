@@ -8,8 +8,8 @@
 using namespace boost;
 using namespace std;
 
-const int VIDEO_X = 400;
-const int VIDEO_Y = 400;
+const int VIDEO_X = 600;
+const int VIDEO_Y = 600;
 
 SDL_Surface *init()
 {
