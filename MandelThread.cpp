@@ -31,8 +31,12 @@ void MandelThread::join()
 MandelThread::~MandelThread()
 {
     thread->interrupt();
+    workMutex->unlock();
+    freeMutex->unlock();
+
     delete thread;
     delete workMutex;
+    delete freeMutex;
 }
 
 void MandelThread::work(MandelThread *object)
