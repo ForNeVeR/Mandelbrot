@@ -22,7 +22,7 @@ private:
     int from_y, to_y;
     double scale;
     
-    static void work(MandelThread *object);
+    static void work(MandelThread *this_mthread);
 };
 
 #endif // MANDELTHREAD_H

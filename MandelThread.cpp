@@ -30,25 +30,29 @@ void MandelThread::join()
 
 MandelThread::~MandelThread()
 {
+    // Request thread interruption and wait for it before deleting objects:
     thread->interrupt();
     workMutex->unlock();
     freeMutex->unlock();
+    thread->join();
 
     delete thread;
     delete workMutex;
     delete freeMutex;
 }
 
-void MandelThread::work(MandelThread *object)
+void MandelThread::work(MandelThread *this_mthread)
 {
     for(;;)
     {
         // Wait for mutex to be opened:
-        object->workMutex->lock();
-        
-        // Do work:
-        draw_part(object->screen, object->from_y, object->to_y, object->scale);
+        this_mthread->workMutex->lock();
+        boost::this_thread::interruption_point();
 
-        object->freeMutex->unlock();
+        // Do work:
+        draw_part(this_mthread->screen, this_mthread->from_y,
+            this_mthread->to_y, this_mthread->scale);
+
+        this_mthread->freeMutex->unlock();
     }
 }

@@ -20,7 +20,8 @@ SDL_Surface *init()
     }
     atexit(SDL_Quit);
 
-    SDL_Surface *screen = SDL_SetVideoMode(VIDEO_X, VIDEO_Y, 16, SDL_SWSURFACE);
+    SDL_Surface *screen = SDL_SetVideoMode(VIDEO_X, VIDEO_Y, 16,
+        SDL_SWSURFACE);
     if(screen == NULL)
     {
         cerr << "Unable to set video mode: " << SDL_GetError() << endl;
