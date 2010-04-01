@@ -47,7 +47,15 @@ void MandelThread::work(MandelThread *this_mthread)
     {
         // Wait for mutex to be opened:
         this_mthread->workMutex->lock();
-        boost::this_thread::interruption_point();
+        try
+        {
+            boost::this_thread::interruption_point();
+        }
+        catch(boost::thread_interrupted &e)
+        {
+            this_mthread->workMutex->unlock();
+            throw e;
+        }
 
         // Do work:
         draw_part(this_mthread->screen, this_mthread->from_y,
