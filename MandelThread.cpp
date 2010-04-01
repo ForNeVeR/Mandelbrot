@@ -54,7 +54,7 @@ void MandelThread::work(MandelThread *this_mthread)
         catch(boost::thread_interrupted &e)
         {
             this_mthread->workMutex->unlock();
-            throw e;
+            throw;
         }
 
         // Do work:
