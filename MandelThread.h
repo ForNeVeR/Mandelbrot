@@ -8,8 +8,8 @@
 class MandelThread
 {
 public:
-    MandelThread();
-    void start(SDL_Surface *screen, int from_y, int to_y, double scale);
+    MandelThread(SDL_Surface *screen, int from_y, int to_y);
+    void draw(double scale);
     void join();
     ~MandelThread();
 

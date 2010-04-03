@@ -2,8 +2,12 @@
 #include "MandelThread.h"
 #include "drawing.h"
 
-MandelThread::MandelThread()
+MandelThread::MandelThread(SDL_Surface *screen, int from_y, int to_y)
 {
+    this->screen = screen;
+    this->from_y = from_y;
+    this->to_y = to_y;
+    
     workMutex = new boost::mutex();
     workMutex->lock();
     freeMutex = new boost::mutex();
@@ -11,12 +15,8 @@ MandelThread::MandelThread()
     thread = new boost::thread(work, this);
 }
 
-void MandelThread::start(SDL_Surface *screen, int from_y, int to_y,
-    double scale)
+void MandelThread::draw(double scale)
 {
-    this->screen = screen;
-    this->from_y = from_y;
-    this->to_y = to_y;
     this->scale = scale;
 
     freeMutex->try_lock();

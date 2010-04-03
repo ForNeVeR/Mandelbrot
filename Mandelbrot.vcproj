@@ -191,6 +191,10 @@
 				RelativePath=".\MandelThread.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\README.txt"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
