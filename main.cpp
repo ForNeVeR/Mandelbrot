@@ -21,7 +21,9 @@ void mainLoop(SDL_Surface *screen)
     for(int i = 0; i < thread_count; ++i)
     {
         threads.push_back(new MandelThread(screen,
-            screen->h * i / thread_count, screen->h * (i + 1) / thread_count));
+            screen->h * i / thread_count,
+            i == thread_count - 1 ? screen_h :    // last thread gets remainder
+            screen->h * (i + 1) / thread_count)); // of the whole screen
     }
     
     for(;;)
