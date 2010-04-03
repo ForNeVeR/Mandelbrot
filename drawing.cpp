@@ -14,20 +14,22 @@ double getScale()
     return 6.0 / (ACC * SDL_GetTicks() * SDL_GetTicks() + 1);
 }
 
-inline double scaleX(int coord, int screen_size, double scale)
+inline double scaleX(int coord, int screen_size_x, double scale)
 {
-    return CENTER_X + coord * scale /  screen_size - scale / 2;
+    return CENTER_X + coord * scale /  screen_size_x - scale / 2;
 }
 
-inline double scaleY(int coord, int screen_size, double scale)
+inline double scaleY(int coord, int screen_size_y, double scale)
 {
-    return CENTER_Y - coord * scale / screen_size + scale / 2;
+    return CENTER_Y - coord * scale / screen_size_y + scale / 2;
 }
 
 /* Draws screen pixels from line start_y to line end_y with specified scale. */
 void draw_part(SDL_Surface *screen, int start_y, int end_y, double scale)
 {
-    int screen_size = SDL_min(screen->w, screen->h);
+    int square_size = SDL_min(screen->w, screen->h);
+    double scale_x = scale * screen->w / square_size;
+    double scale_y = scale * screen->h / square_size;
     for(int x0 = 0; x0 < screen->w; ++x0)
     {
         for(int y0 = start_y; y0 < end_y; ++y0)
@@ -35,8 +37,8 @@ void draw_part(SDL_Surface *screen, int start_y, int end_y, double scale)
             Uint16 *pPixel = (Uint16 *)screen->pixels +
                 y0 * screen->pitch / 2 + x0;
             
-            double x1 = scaleX(x0, screen_size, scale);
-            double y1 = scaleY(y0, screen_size, scale);
+            double x1 = scaleX(x0, screen->w, scale_x);
+            double y1 = scaleY(y0, screen->h, scale_y);
 
             double x = x1;
             double y = y1;

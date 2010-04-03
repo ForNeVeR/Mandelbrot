@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
             video_h = SDL_GetVideoInfo()->current_h;
         }
     }
-    else if(argc > 3)
+    else if(argc >= 3)
     {
         video_w = atoi(argv[1]);
         video_h = atoi(argv[2]);
