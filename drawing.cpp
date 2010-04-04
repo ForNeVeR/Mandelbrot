@@ -1,9 +1,12 @@
 /* Main file for drawing routines. */
 #include "drawing.h"
 
+#include <cmath>
 #include <SDL.h>
 
-const double ACC = 0.00001;
+using namespace std;
+
+const double SPEED = 1.1;
 const double CENTER_X = 0.001643721971153;
 const double CENTER_Y = 0.822467633298876;
 const int MAX_ITERATION = 128;
@@ -11,7 +14,7 @@ const int MAX_ITERATION = 128;
 /* Returns scale at current moment of time. */
 double getScale()
 {
-    return 6.0 / (ACC * SDL_GetTicks() * SDL_GetTicks() + 1);
+    return 6.0 / pow(SPEED, (double)SDL_GetTicks() / 300);
 }
 
 inline double scaleX(int coord, int screen_size_x, double scale)

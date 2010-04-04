@@ -22,7 +22,7 @@ void mainLoop(SDL_Surface *screen)
     {
         threads.push_back(new MandelThread(screen,
             screen->h * i / thread_count,
-            i == thread_count - 1 ? screen->h :    // last thread gets remainder
+            i == thread_count - 1 ? screen->h :   // last thread gets remainder
             screen->h * (i + 1) / thread_count)); // of the whole screen
     }
     

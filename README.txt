@@ -10,4 +10,7 @@ will run program in fullscreen mode.
 will run program windowed with default window size (this mode also will be used
 in case of some problems).
 
+Please note that drawing calculation results on big windows take many system
+resources.
+
 During running press ESC key for exit.
