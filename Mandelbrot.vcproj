@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;F:\X-Files\Projects\Lib\boost_1_42_0&quot;;C:\Programs\SDL\include"
+				AdditionalIncludeDirectories="&quot;F:\X-Files\Projects\Lib\boost_1_42_0&quot;;&quot;F:\X-Files\Projects\Lib\SDL\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="c:\Programs\SDL\VisualC\SDL\Debug\SDL.lib c:\Programs\SDL\VisualC\SDLmain\Debug\SDLmain.lib"
+				AdditionalDependencies="F:\X-Files\Projects\Lib\SDL\VisualC\SDL\$(ConfigurationName)\SDL.lib F:\X-Files\Projects\Lib\SDL\VisualC\SDLmain\$(ConfigurationName)\SDLmain.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;F:\X-Files\Projects\Lib\boost_1_42_0\stage\lib&quot;"
 				GenerateDebugInformation="true"
@@ -119,7 +119,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;F:\X-Files\Projects\Lib\boost_1_42_0&quot;;C:\Programs\SDL\include"
+				AdditionalIncludeDirectories="&quot;F:\X-Files\Projects\Lib\boost_1_42_0&quot;;&quot;F:\X-Files\Projects\Lib\SDL\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -138,7 +138,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="c:\Programs\SDL\VisualC\SDL\Release\SDL.lib c:\Programs\SDL\VisualC\SDLmain\Release\SDLmain.lib"
+				AdditionalDependencies="F:\X-Files\Projects\Lib\SDL\VisualC\SDL\$(ConfigurationName)\SDL.lib F:\X-Files\Projects\Lib\SDL\VisualC\SDLmain\$(ConfigurationName)\SDLmain.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;F:\X-Files\Projects\Lib\boost_1_42_0\stage\lib&quot;"
 				IgnoreDefaultLibraryNames=""
@@ -195,6 +195,10 @@
 				RelativePath=".\README.txt"
 				>
 			</File>
+			<File
+				RelativePath=".\text_rendering.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -206,7 +210,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\font.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MandelThread.h"
+				>
+			</File>
+			<File
+				RelativePath=".\text_rendering.h"
 				>
 			</File>
 		</Filter>

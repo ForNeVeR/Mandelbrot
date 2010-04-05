@@ -37,7 +37,7 @@ void draw_part(SDL_Surface *screen, int start_y, int end_y, double scale)
     {
         for(int y0 = start_y; y0 < end_y; ++y0)
         {
-            Uint16 *pPixel = (Uint16 *)screen->pixels +
+            Uint16 *p_pixel = (Uint16 *)screen->pixels +
                 y0 * screen->pitch / 2 + x0;
             
             double x1 = scaleX(x0, screen->w, scale_x);
@@ -63,7 +63,7 @@ void draw_part(SDL_Surface *screen, int start_y, int end_y, double scale)
             Uint8 G = 128 + grade * 128;
             Uint8 B = 256 - grade * 256;
             Uint32 color = SDL_MapRGB(screen->format, R, G, B);
-            *pPixel = color;
+            *p_pixel = color;
         }
     }
 }
