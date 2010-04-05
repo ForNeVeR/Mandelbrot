@@ -141,8 +141,8 @@ void frameCounter(SDL_Surface *screen)
 
         float avg_fps = (float)frame * 1000 / (tick - last_tick);
         // Buffer overflow protection:
-        if (avg_fps >= 100000) // yeah, I know, this is almost unbelievable
-            avg_fps = 99999;
+        if (avg_fps >= 10000) // yeah, I know, this is almost unbelievable
+            avg_fps = 9999;
         sprintf(buff, "FPS: %i", (int)avg_fps);
 
         frame = 0;
