@@ -35,6 +35,7 @@ add_executable(Mandelbrot
   main.cpp
   drawing.cpp
   MandelThread.cpp
+  text_rendering.cpp
 )
 
 target_link_libraries(Mandelbrot
