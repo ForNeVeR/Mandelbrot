@@ -1,11 +1,13 @@
-/* This file is used for storing font definition. */
+/* This file used for storing font definition. */
 
 #ifndef FONT_H
 #define FONT_H
 
+typedef bool PixelArray[8][8];
+
 namespace
 {
-    const bool SPACE[8][8] =
+    const PixelArray SPACE =
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -14,7 +16,7 @@ namespace
           { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 0, 0, 0, 0, 0, 0, 0 } };
-    const bool COLON[8][8] = 
+    const PixelArray COLON = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 0, 0, 1, 1, 0, 0, 0 },
           { 0, 0, 0, 1, 1, 0, 0, 0 },
@@ -23,7 +25,7 @@ namespace
           { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 0, 0, 1, 1, 0, 0, 0 },
           { 0, 0, 0, 1, 1, 0, 0, 0 } };
-    const bool ZERO[8][8] = 
+    const PixelArray ZERO = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
@@ -32,7 +34,7 @@ namespace
           { 0, 1, 1, 0, 0, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 } };
-    const bool ONE[8][8] = 
+    const PixelArray ONE = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 0, 0, 1, 1, 0, 0, 0 },
           { 0, 0, 1, 1, 1, 0, 0, 0 },
@@ -41,7 +43,7 @@ namespace
           { 0, 0, 0, 1, 1, 0, 0, 0 },
           { 0, 0, 0, 1, 1, 0, 0, 0 },
           { 0, 0, 0, 1, 1, 0, 0, 0 } };
-    const bool TWO[8][8] = 
+    const PixelArray TWO = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
@@ -50,7 +52,7 @@ namespace
           { 0, 0, 1, 1, 1, 1, 0, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 } };
-    const bool THREE[8][8] = 
+    const PixelArray THREE = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
@@ -59,7 +61,7 @@ namespace
           { 0, 1, 1, 0, 0, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 } };
-    const bool FOUR[8][8] = 
+    const PixelArray FOUR = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 1, 1, 0, 0, 1, 1, 0 },
           { 0, 1, 1, 0, 0, 1, 1, 0 },
@@ -68,7 +70,7 @@ namespace
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 0, 0, 0, 0, 1, 1, 0 },
           { 0, 0, 0, 0, 0, 1, 1, 0 } };
-    const bool FIVE[8][8] = 
+    const PixelArray FIVE = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
@@ -77,7 +79,7 @@ namespace
           { 0, 0, 0, 0, 0, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 } };
-    const bool SIX[8][8] = 
+    const PixelArray SIX = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
@@ -86,7 +88,7 @@ namespace
           { 0, 1, 1, 0, 0, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 } };
-    const bool SEVEN[8][8] = 
+    const PixelArray SEVEN = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
@@ -95,7 +97,7 @@ namespace
           { 0, 0, 0, 0, 1, 1, 0, 0 },
           { 0, 0, 0, 0, 1, 1, 0, 0 },
           { 0, 0, 0, 0, 1, 1, 0, 0 } };
-    const bool EIGHT[8][8] = 
+    const PixelArray EIGHT = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
@@ -104,7 +106,7 @@ namespace
           { 0, 1, 1, 0, 0, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 } };
-    const bool NINE[8][8] = 
+    const PixelArray NINE = 
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
@@ -140,7 +142,7 @@ namespace
           { 0, 0, 0, 0, 0, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 },
           { 0, 1, 1, 1, 1, 1, 1, 0 } };
-    const bool UNKNOWN[8][8] =
+    const PixelArray UNKNOWN =
         { { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -150,8 +152,6 @@ namespace
           { 0, 0, 0, 0, 0, 0, 0, 0 },
           { 0, 0, 0, 0, 0, 0, 0, 0 } };
 }
-
-typedef bool PixelArray[8][8];
 
 /* This function returns array 8x8 of bool values, where 1 means black color of
  * pixel and 0 means transparent color of pixel. */

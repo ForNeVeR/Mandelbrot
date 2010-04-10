@@ -1,10 +1,8 @@
-// Global TODO: rewrite some parts in C++-style (especially - working with
-// strings).
-
 #include <cmath>
-#include <cstdio>
 #include <iostream>
+#include <string>
 #include <vector>
+#include <boost/format.hpp>
 #include <boost/thread/thread.hpp>
 #include <SDL.h>
 
@@ -131,7 +129,7 @@ void frameCounter(SDL_Surface *screen)
     static Uint32 last_tick = 0;
     
     static int frame = 0;
-    static char buff[10] = "";
+    static string buff;
 
     ++frame;
 
@@ -140,10 +138,7 @@ void frameCounter(SDL_Surface *screen)
         Uint32 tick = SDL_GetTicks();
 
         float avg_fps = (float)frame * 1000 / (tick - last_tick);
-        // Buffer overflow protection:
-        if (avg_fps >= 10000) // yeah, I know, this is almost unbelievable
-            avg_fps = 9999;
-        sprintf(buff, "FPS: %i", (int)avg_fps);
+        buff = (format("FPS: %1%") % (int)avg_fps).str();
 
         frame = 0;
         last_tick = tick;
