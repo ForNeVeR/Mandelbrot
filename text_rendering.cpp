@@ -28,7 +28,7 @@ void render_text(SDL_Surface *screen, const string &text)
                 {
                     Uint16 *p_pixel = (Uint16 *)screen->pixels +
                         (y + TOP_MARGIN) * screen->pitch / 2 + x_pos + x;
-                    *p_pixel = SDL_MapRGB(screen->format, 256, 256, 256);
+                    *p_pixel = SDL_MapRGB(screen->format, 0, 0, 0);
                 }
                 // Else let pixel as is ("transparent" color).
             }
