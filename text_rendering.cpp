@@ -14,23 +14,33 @@ void render_text(SDL_Surface *screen, const string &text)
 {
     const int TOP_MARGIN = 5;
     const int RIGHT_MARGIN = 5;
+    int y0 = TOP_MARGIN;
 
     for(int i = 0; i < text.length(); ++i)
     {
-        int x_pos = screen->w - RIGHT_MARGIN - 8 * (text.length() - i);
+        int x_pos = screen->w - RIGHT_MARGIN - 8 *
+            ((text.find('\n', i) == string::npos ? text.length() :
+            text.find('\n', i)) - i);
 
-        const PixelArray &character = get_character(text[i]);
-        for(int x = 0; x < 8; ++x)
+        if(text[i] == '\n')
         {
-            for(int y = 0; y < 8; ++y)
+            y0 += 10;
+        }
+        else
+        {
+            const PixelArray &character = get_character(text[i]);
+            for(int x = 0; x < 8; ++x)
             {
-                if(character[y][x])
+                for(int y = 0; y < 8; ++y)
                 {
-                    Uint16 *p_pixel = (Uint16 *)screen->pixels +
-                        (y + TOP_MARGIN) * screen->pitch / 2 + x_pos + x;
-                    *p_pixel = SDL_MapRGB(screen->format, 0, 0, 0);
+                    if(character[y][x])
+                    {
+                        Uint16 *p_pixel = (Uint16 *)screen->pixels +
+                            (y0 + y) * screen->pitch / 2 + x_pos + x;
+                        *p_pixel = SDL_MapRGB(screen->format, 0, 0, 0);
+                    }
+                    // Else let pixel as is ("transparent" color).
                 }
-                // Else let pixel as is ("transparent" color).
             }
         }
     }

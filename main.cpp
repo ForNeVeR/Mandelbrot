@@ -164,7 +164,7 @@ void frameCounter(SDL_Surface *screen)
     static Uint32 last_tick = 0;
     
     static int frame = 0;
-    static string buff;
+    static string fps;
 
     ++frame;
 
@@ -173,13 +173,14 @@ void frameCounter(SDL_Surface *screen)
         Uint32 tick = SDL_GetTicks();
 
         float avg_fps = (float)frame * 1000.0f / (tick - last_tick);
-        buff = (format("FPS: %1%") % (int)avg_fps).str();
+        fps = (format("FPS: %1%") % (int)avg_fps).str();
 
         frame = 0;
         last_tick = tick;
     }
+    string output = fps + (format("\nSCALE: %1$E") % getScale()).str();
 
-    render_text(screen, buff);
+    render_text(screen, output);
 }
 
 const double SPEED = 1.1;
