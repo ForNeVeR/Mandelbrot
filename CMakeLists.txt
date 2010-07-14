@@ -13,11 +13,11 @@ find_package(SDL)
 find_package(Boost 1.37 COMPONENTS thread)
 
 if(NOT SDL_FOUND)
-  message(FATAL_ERROR "SDL is not found")
+  message(FATAL_ERROR "SDL not found")
 endif()
 
 if(NOT Boost_FOUND)
-  message(FATAL_ERROR "Boost is not found")
+  message(FATAL_ERROR "Boost not found")
 endif()
 
 ##########
@@ -33,7 +33,7 @@ include_directories(
 
 add_executable(Mandelbrot
   main.cpp
-  drawing.cpp
+  MandelDrawer.cpp
   MandelThread.cpp
   text_rendering.cpp
 )

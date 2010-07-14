@@ -1,34 +1,34 @@
-/* Main file for drawing routines. */
-#include "drawing.h"
+/* Main file for class that performs drawing operations. */
+#include "MandelDrawer.h"
 
-#include <cmath>
-#include <SDL.h>
-
-using namespace std;
-
-const double SPEED = 1.1;
-const double CENTER_X = 0.001643721971153;
-const double CENTER_Y = 0.822467633298876;
-const int MAX_ITERATION = 128;
-
-/* Returns scale at current moment of time. */
-double getScale()
+MandelDrawer::MandelDrawer(SDL_Surface *screen, double center_x,
+    double center_y, int start_y, int end_y)
 {
-    return 6.0 / pow(SPEED, (double)SDL_GetTicks() / 300);
+    this->screen = screen;
+    this->center_x = center_x;
+    this->center_y = center_y;
+    this->start_y = start_y;
+    this->end_y = end_y;
 }
 
-inline double scaleX(int coord, int screen_size_x, double scale)
+void MandelDrawer::setCenter(double x, double y)
 {
-    return CENTER_X + coord * scale /  screen_size_x - scale / 2;
+    center_x = x;
+    center_y = y;
 }
 
-inline double scaleY(int coord, int screen_size_y, double scale)
+double MandelDrawer::scaleX(int x, double scale)
 {
-    return CENTER_Y - coord * scale / screen_size_y + scale / 2;
+    return center_x + x * scale / screen->w - scale / 2;
+}
+
+double MandelDrawer::scaleY(int y, double scale)
+{
+    return center_y - y * scale / screen->h + scale / 2;
 }
 
 /* Draws screen pixels from line start_y to line end_y with specified scale. */
-void draw_part(SDL_Surface *screen, int start_y, int end_y, double scale)
+void MandelDrawer::draw(double scale)
 {
     int square_size = SDL_min(screen->w, screen->h);
     double scale_x = scale * screen->w / square_size;
@@ -40,8 +40,8 @@ void draw_part(SDL_Surface *screen, int start_y, int end_y, double scale)
             Uint16 *p_pixel = (Uint16 *)screen->pixels +
                 y0 * screen->pitch / 2 + x0;
             
-            double x1 = scaleX(x0, screen->w, scale_x);
-            double y1 = scaleY(y0, screen->h, scale_y);
+            double x1 = scaleX(x0, scale_x);
+            double y1 = scaleY(y0, scale_y);
 
             double x = x1;
             double y = y1;

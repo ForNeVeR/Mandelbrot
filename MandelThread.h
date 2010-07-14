@@ -5,11 +5,15 @@
 #include <boost/thread/thread.hpp>
 #include <SDL.h>
 
+#include "MandelDrawer.h"
+
 class MandelThread
 {
 public:
-    MandelThread(SDL_Surface *screen, int from_y, int to_y);
+    MandelThread(SDL_Surface *screen, double center_x, double center_y,
+        int from_y, int to_y);
     void draw(double scale);
+    void setCenter(double x, double y);
     void join();
     ~MandelThread();
 
@@ -18,8 +22,7 @@ private:
     boost::mutex *workMutex;
     boost::mutex *freeMutex;
 
-    SDL_Surface *screen;
-    int from_y, to_y;
+    MandelDrawer *drawer;
     double scale;
     
     static void work(MandelThread *this_mthread);

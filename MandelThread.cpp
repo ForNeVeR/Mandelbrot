@@ -1,12 +1,10 @@
 /* Main source file for MandelThread class. */
 #include "MandelThread.h"
-#include "drawing.h"
 
-MandelThread::MandelThread(SDL_Surface *screen, int from_y, int to_y)
+MandelThread::MandelThread(SDL_Surface *screen, double center_x,
+    double center_y, int from_y, int to_y)
 {
-    this->screen = screen;
-    this->from_y = from_y;
-    this->to_y = to_y;
+    drawer = new MandelDrawer(screen, center_x, center_y, from_y, to_y);
     
     workMutex = new boost::mutex();
     workMutex->lock();
@@ -21,6 +19,11 @@ void MandelThread::draw(double scale)
 
     freeMutex->try_lock();
     workMutex->unlock();
+}
+
+void MandelThread::setCenter(double x, double y)
+{
+    drawer->setCenter(x, y);
 }
 
 void MandelThread::join()
@@ -39,6 +42,7 @@ MandelThread::~MandelThread()
     delete thread;
     delete workMutex;
     delete freeMutex;
+    delete drawer;
 }
 
 void MandelThread::work(MandelThread *this_mthread)
@@ -51,16 +55,15 @@ void MandelThread::work(MandelThread *this_mthread)
         {
             boost::this_thread::interruption_point();
         }
-        catch(boost::thread_interrupted &)
+        catch(const boost::thread_interrupted &)
         {
             this_mthread->workMutex->unlock();
             throw;
         }
 
         // Do work:
-        draw_part(this_mthread->screen, this_mthread->from_y,
-            this_mthread->to_y, this_mthread->scale);
-
+        this_mthread->drawer->draw(this_mthread->scale);
+        
         this_mthread->freeMutex->unlock();
     }
 }
