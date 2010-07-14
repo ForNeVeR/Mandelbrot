@@ -1,7 +1,7 @@
-Mandelbrot is program for real-time visualizing Mandelbrot set. Points are
-drawn with various colors according to 'depth' (how many iterations taken to
-determine that point is NOT part of Mandelbrot set). If point really IS part of
-set, it will be drawn with black color.
+Mandelbrot is program for real-time visualizing of the Mandelbrot set. Points
+are drawn with various colors according to 'depth' (how many iterations taken
+to determine that point is NOT part of Mandelbrot set). If point really IS part
+of set, it will be drawn with black color.
 
 STARTING PROGRAM
 
