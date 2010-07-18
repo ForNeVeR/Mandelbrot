@@ -37,9 +37,6 @@ void MandelDrawer::draw(double scale)
     {
         for(int y0 = start_y; y0 < end_y; ++y0)
         {
-            Uint16 *p_pixel = (Uint16 *)screen->pixels +
-                y0 * screen->pitch / 2 + x0;
-            
             double x1 = scaleX(x0, scale_x);
             double y1 = scaleY(y0, scale_y);
 
@@ -59,6 +56,8 @@ void MandelDrawer::draw(double scale)
             }
 
             float grade = (float)iteration / MAX_ITERATION;
+            Uint16 *p_pixel = (Uint16 *)screen->pixels +
+                y0 * screen->pitch / 2 + x0;
             Uint8 R = grade * 256;
             Uint8 G = 128 + grade * 128;
             Uint8 B = 256 - grade * 256;
