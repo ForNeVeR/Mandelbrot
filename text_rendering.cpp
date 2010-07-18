@@ -1,12 +1,10 @@
-/* Source file for text rendering. */
 #include "text_rendering.h"
 
-#include <string>
 #include <SDL.h>
 
-using namespace std;
-
 #include "font.h"
+
+using namespace std;
 
 /* This function renders specified text in the top right corner of the
  * screen. */

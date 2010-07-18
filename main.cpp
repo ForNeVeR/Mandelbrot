@@ -6,8 +6,9 @@
 #include <boost/thread/thread.hpp>
 #include <SDL.h>
 
-#include "text_rendering.h"
+#include "MandelMap.h"
 #include "MandelThread.h"
+#include "text_rendering.h"
 
 using namespace boost;
 using namespace std;
@@ -79,11 +80,13 @@ void mainLoop(SDL_Surface *screen)
     double center_x = CENTER_X_DEFAULT;
     double center_y = CENTER_Y_DEFAULT;
 
+    MandelMap map(screen->w, screen->h);
+
     int thread_count = thread::hardware_concurrency();
     vector<MandelThread *> threads;
     for(int i = 0; i < thread_count; ++i)
     {
-        threads.push_back(new MandelThread(screen, center_x, center_y,
+        threads.push_back(new MandelThread(&map, center_x, center_y,
             screen->h * i / thread_count,
             i == thread_count - 1 ? screen->h :   // last thread gets remainder
             screen->h * (i + 1) / thread_count)); // of the whole screen
@@ -95,13 +98,14 @@ void mainLoop(SDL_Surface *screen)
         double scale = getScale();
         for(int i = 0; i < thread_count; ++i)
         {
-            threads[i]->draw(scale);
+            threads[i]->calculate(scale);
         }
         for(int i = 0; i < thread_count; ++i)
         {
             threads[i]->join();
         }
 
+        map.draw(screen);
         renderInfo(screen, scale);
 
         // Draw screen:

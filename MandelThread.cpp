@@ -1,10 +1,12 @@
-/* Main source file for MandelThread class. */
 #include "MandelThread.h"
 
-MandelThread::MandelThread(SDL_Surface *screen, double center_x,
-    double center_y, int from_y, int to_y)
+#include "MandelDrawer.h"
+#include "MandelMap.h"
+
+MandelThread::MandelThread(MandelMap *map, double center_x, double center_y,
+    int from_y, int to_y)
 {
-    drawer = new MandelDrawer(screen, center_x, center_y, from_y, to_y);
+    drawer = new MandelDrawer(map, center_x, center_y, from_y, to_y);
     
     workMutex = new boost::mutex();
     workMutex->lock();
@@ -13,7 +15,7 @@ MandelThread::MandelThread(SDL_Surface *screen, double center_x,
     thread = new boost::thread(work, this);
 }
 
-void MandelThread::draw(double scale)
+void MandelThread::calculate(double scale)
 {
     this->scale = scale;
 
@@ -62,7 +64,7 @@ void MandelThread::work(MandelThread *this_mthread)
         }
 
         // Do work:
-        this_mthread->drawer->draw(this_mthread->scale);
+        this_mthread->drawer->calculate(this_mthread->scale);
         
         this_mthread->freeMutex->unlock();
     }

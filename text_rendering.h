@@ -1,9 +1,10 @@
-/* Header file for text rendering. */
+/* Text rendering function. */
 #ifndef TEXT_RENDERING_H
 #define TEXT_RENDERING_H
 
 #include <string>
-#include <SDL.h>
+
+struct SDL_Surface;
 
 void render_text(SDL_Surface *screen, const std::string &text);
 

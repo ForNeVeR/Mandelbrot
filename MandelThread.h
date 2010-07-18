@@ -1,18 +1,19 @@
-/* Header file for MandelThread class. */
+/* MandelThread is clas for multi-threaded calculation of Mandelbrot set
+ * points. */
 #ifndef MANDELTHREAD_H
 #define MANDELTHREAD_H
 
 #include <boost/thread/thread.hpp>
-#include <SDL.h>
 
-#include "MandelDrawer.h"
+class MandelDrawer;
+class MandelMap;
 
 class MandelThread
 {
 public:
-    MandelThread(SDL_Surface *screen, double center_x, double center_y,
-        int from_y, int to_y);
-    void draw(double scale);
+    MandelThread(MandelMap *map, double center_x, double center_y, int from_y,
+        int to_y);
+    void calculate(double scale);
     void setCenter(double x, double y);
     void join();
     ~MandelThread();

@@ -2,26 +2,26 @@
 #ifndef MANDELDRAWER_H
 #define MANDELDRAWER_H
 
-#include <SDL.h>
+class MandelMap;
 
 class MandelDrawer
 {
 public:
-    MandelDrawer(SDL_Surface *screen, double center_x, double center_y,
-        int start_y, int end_y);
+    MandelDrawer(MandelMap *map, double center_x, double center_y, int from_y,
+        int to_y);
     void setCenter(double x, double y);
     
-    void draw(double scale);
+    void calculate(double scale);
 
 private:
-    SDL_Surface *screen;
+    MandelMap *map;
     double center_x, center_y;
-    int start_y, end_y;
+    int from_y, to_y;
 
-    const static int MAX_ITERATION = 128;
+    const static int MAX_ITERATION = 256;
 
-    inline double scaleX(int x, double scale);
-    inline double scaleY(int y, double scale);
+    inline double scaleX(int x, double scale) const;
+    inline double scaleY(int y, double scale) const;
 };
 
 #endif // MANDELDRAWER_H
