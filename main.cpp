@@ -20,7 +20,7 @@ const Uint32 VIDEO_MODE_DEFAULT = SDL_SWSURFACE;
 const double CENTER_X_DEFAULT = 0.001643721971153;
 const double CENTER_Y_DEFAULT = 0.822467633298876;
 
-inline void frameCounter(SDL_Surface *screen);
+inline void renderInfo(SDL_Surface *screen, double scale);
 inline double getScale();
 void mainLoop(SDL_Surface *screen);
 
@@ -102,7 +102,7 @@ void mainLoop(SDL_Surface *screen)
             threads[i]->join();
         }
 
-        frameCounter(screen);
+        renderInfo(screen, scale);
 
         // Draw screen:
         SDL_UpdateRect(screen, 0, 0, screen->w, screen->h);
@@ -156,8 +156,8 @@ void mainLoop(SDL_Surface *screen)
     }
 }
 
-/* An FPS counter (recounts every 25 frames). Should be called every frame. */
-void frameCounter(SDL_Surface *screen)
+/* This function should be called every frame for proper FPS counting. */
+void renderInfo(SDL_Surface *screen, double scale)
 {
     const int recount_threshold = 25;
 
@@ -178,7 +178,7 @@ void frameCounter(SDL_Surface *screen)
         frame = 0;
         last_tick = tick;
     }
-    string output = fps + (format("\nSCALE: %1$E") % getScale()).str();
+    string output = fps + (format("\nSCALE: %1$E") % scale).str();
 
     render_text(screen, output);
 }
