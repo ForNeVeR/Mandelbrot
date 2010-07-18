@@ -35,6 +35,7 @@ add_executable(Mandelbrot
   main.cpp
   MandelDrawer.cpp
   MandelThread.cpp
+  MandelMap.cpp
   text_rendering.cpp
 )
 
