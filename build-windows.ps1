@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Downloads and build the LeechCraft dependencies and build the program.
+    Downloads and build the Mandelbrot dependencies and build the program.
 .PARAMETER Platform
     Target platform triplet in vcpkg notation. Check `vcpkg help triplet` for
     documentation.
