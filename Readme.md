@@ -60,3 +60,5 @@ Default zoom position in selected for some interesting figures showing in it.
 - **ESC**: exit
 
 [screenshot]: docs/screenshot.png
+
+[vcpkg]: https://github.com/Microsoft/vcpkg
