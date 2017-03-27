@@ -46,7 +46,7 @@ void MandelMap::draw(SDL_PixelFormat *pixelFormat, vector<Uint32> &pixels)
         for(int x = 0; x < width; ++x)
         {
             float grade = (float)(get(x, y)) / maxIteration;
-            auto& p_pixel = pixels[x + y * width];
+            auto &p_pixel = pixels[x + y * width];
             Uint8 R = grade * 256;
             Uint8 G = 128 + grade * 128;
             Uint8 B = 256 - grade * 256;

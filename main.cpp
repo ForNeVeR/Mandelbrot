@@ -18,7 +18,7 @@ const int VIDEO_H_DEFAULT = 400;
 const double CENTER_X_DEFAULT = 0.001643721971153;
 const double CENTER_Y_DEFAULT = 0.822467633298876;
 
-void renderInfo(SDL_PixelFormat *pixelFormat, const int screenWidth, double scale, vector<Uint32> pixels);
+void renderInfo(SDL_PixelFormat *pixelFormat, const int screenWidth, double scale, vector<Uint32> &pixels);
 inline double getScale();
 void mainLoop(
     SDL_Window *window,
@@ -93,7 +93,7 @@ void mainLoop(
     SDL_Window *window,
     SDL_Renderer *renderer,
     SDL_Texture *texture,
-	SDL_PixelFormat *pixelFormat,
+    SDL_PixelFormat *pixelFormat,
     const int screenWidth,
     const int screenHeight)
 {
@@ -185,7 +185,7 @@ void mainLoop(
 }
 
 /* This function should be called every frame for proper FPS counting. */
-void renderInfo(SDL_PixelFormat *pixelFormat, const int screenWidth, double scale, vector<Uint32> pixels)
+void renderInfo(SDL_PixelFormat *pixelFormat, const int screenWidth, double scale, vector<Uint32> &pixels)
 {
     const int recount_threshold = 25;
 

@@ -6,7 +6,7 @@ using namespace std;
 
 /* This function renders specified text in the top right corner of the
  * screen. */
-void render_text(SDL_PixelFormat *pixelFormat, const int screenWidth, const string &text, vector<Uint32> pixels)
+void render_text(SDL_PixelFormat *pixelFormat, const int screenWidth, const string &text, vector<Uint32> &pixels)
 {
     const int TOP_MARGIN = 5;
     const int RIGHT_MARGIN = 5;
@@ -32,7 +32,7 @@ void render_text(SDL_PixelFormat *pixelFormat, const int screenWidth, const stri
                     if (character[y][x])
                     {
                         auto color = SDL_MapRGB(pixelFormat, 0, 0, 0);
-                        pixels[(y0 + y) * screenWidth / 2 + x_pos + x] = color;
+                        pixels[(y0 + y) * screenWidth + x_pos + x] = color;
                     }
                     // Else let pixel as is ("transparent" color).
                 }
