@@ -1,27 +1,44 @@
+Mandelbrot
+==========
+
 Mandelbrot is program for real-time visualizing of the Mandelbrot set. Points
 are drawn with various colors according to 'depth' (how many iterations taken
 to determine that point is NOT part of Mandelbrot set). If point really IS part
 of set, it will be drawn with black color.
 
-STARTING PROGRAM
+![Screenshot][screenshot]
 
-> Mandelbrot W H
-run program in windowed mode with window size W x H.
+Starting the program
+--------------------
 
-> Mandelbrot --full
-run program in fullscreen mode.
+Windowed mode with window size W x H:
 
-> Mandelbrot
-will run program windowed with default window size (this mode also will be used
-in case of some problems).
+```console
+$ Mandelbrot W H
+```
+
+Fullscreen mode:
+
+```console
+$ Mandelbrot --full
+```
+
+Windowed with default window size:
+
+```console
+$ Mandelbrot
+```
 
 Please note that running with big window size or fullscreen takes many system
 resources.
 
-USAGE
+Usage
+-----
 
 You can just relax and watch as Mandelbrot set view is zooming on your screen.
 Default zoom position in selected for some interesting figures showing in it.
 
-You can change projection center by arrow keys.
-During running press ESC key for exit.
+- **Arrow keys**: change projection center
+- **ESC**: exit
+
+[screenshot]: docs/screenshot.png
