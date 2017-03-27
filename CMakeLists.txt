@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.4)
+cmake_minimum_required(VERSION 2.8)
 
 ##########
 # project
@@ -9,15 +9,17 @@ project("Mandelbrot")
 ###########
 # packages
 
-find_package(SDL)
-find_package(Boost 1.37 COMPONENTS thread)
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
-if(NOT SDL_FOUND)
-  message(FATAL_ERROR "SDL not found")
-endif()
+find_package(Boost 1.63 COMPONENTS thread)
+find_package(SDL2)
 
 if(NOT Boost_FOUND)
   message(FATAL_ERROR "Boost not found")
+endif()
+
+if(NOT SDL2_FOUND)
+  message(FATAL_ERROR "SDL2 not found")
 endif()
 
 ##########
@@ -40,6 +42,6 @@ add_executable(Mandelbrot
 )
 
 target_link_libraries(Mandelbrot
-  ${SDL_LIBRARY}
+  ${SDL2_LIBRARY}
   ${Boost_LIBRARIES}
 )
