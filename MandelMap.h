@@ -1,9 +1,11 @@
-/* MandelMap is a class for storing results of MandelThreads work. It stores
+﻿/* MandelMap is a class for storing results of MandelThreads work. It stores
  * count of iterations for every pixel of the screen. */
 #ifndef MANDELMAP_H
 #define MANDELMAP_H
 
-#include <SDL.h>
+#include <vector>
+
+#include <SDL2/SDL.h>
 
 class MandelMap
 {
@@ -15,7 +17,7 @@ public:
     int getHeight() const;
 
     void set(int x, int y, int value);
-    void draw(SDL_Surface *screen);
+    void draw(SDL_PixelFormat *pixelFormat, std::vector<Uint32> &pixels);
 
 private:
     int width, height;

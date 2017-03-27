@@ -1,14 +1,12 @@
 #include "text_rendering.h"
 
-#include <SDL.h>
-
 #include "font.h"
 
 using namespace std;
 
 /* This function renders specified text in the top right corner of the
  * screen. */
-void render_text(SDL_Surface *screen, const string &text)
+void render_text(SDL_PixelFormat *pixelFormat, const int screenWidth, const string &text, vector<Uint32> pixels)
 {
     const int TOP_MARGIN = 5;
     const int RIGHT_MARGIN = 5;
@@ -16,7 +14,7 @@ void render_text(SDL_Surface *screen, const string &text)
 
     for(int i = 0; i < text.length(); ++i)
     {
-        int x_pos = screen->w - RIGHT_MARGIN - 8 *
+        int x_pos = screenWidth - RIGHT_MARGIN - 8 *
             ((text.find('\n', i) == string::npos ? text.length() :
             text.find('\n', i)) - i);
 
@@ -31,11 +29,10 @@ void render_text(SDL_Surface *screen, const string &text)
             {
                 for(int y = 0; y < 8; ++y)
                 {
-                    if(character[y][x])
+                    if (character[y][x])
                     {
-                        Uint16 *p_pixel = (Uint16 *)screen->pixels +
-                            (y0 + y) * screen->pitch / 2 + x_pos + x;
-                        *p_pixel = SDL_MapRGB(screen->format, 0, 0, 0);
+                        auto color = SDL_MapRGB(pixelFormat, 0, 0, 0);
+                        pixels[(y0 + y) * screenWidth / 2 + x_pos + x] = color;
                     }
                     // Else let pixel as is ("transparent" color).
                 }

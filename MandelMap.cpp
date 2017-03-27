@@ -1,8 +1,6 @@
-#include "MandelMap.h"
+﻿#include "MandelMap.h"
 
 #include <cassert>
-
-#include <SDL.h>
 
 using namespace std;
 
@@ -38,7 +36,7 @@ void MandelMap::set(int x, int y, int value)
     data[y * width + x] = value;
 }
 
-void MandelMap::draw(SDL_Surface *screen)
+void MandelMap::draw(SDL_PixelFormat *pixelFormat, vector<Uint32> &pixels)
 {
     minMaxCached = false;
 
@@ -48,13 +46,12 @@ void MandelMap::draw(SDL_Surface *screen)
         for(int x = 0; x < width; ++x)
         {
             float grade = (float)(get(x, y)) / maxIteration;
-            Uint16 *p_pixel = (Uint16 *)screen->pixels +
-                y * screen->pitch / 2 + x;
+            auto& p_pixel = pixels[x + y * width];
             Uint8 R = grade * 256;
             Uint8 G = 128 + grade * 128;
             Uint8 B = 256 - grade * 256;
-            Uint32 color = SDL_MapRGB(screen->format, R, G, B);
-            *p_pixel = color;
+            auto color = SDL_MapRGB(pixelFormat, R, G, B);
+            p_pixel = color;
         }
     }
     getMin();
