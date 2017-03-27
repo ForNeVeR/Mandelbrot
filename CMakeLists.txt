@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 
 ##########
 # project
-# TODO: Windos/VS features
 
 project("Mandelbrot")
 
@@ -26,22 +25,22 @@ endif()
 # globals
 
 include_directories(
-  ${SDL_INCLUDE_DIR}
   ${Boost_INCLUDE_DIRS}
+  ${SDL2_INCLUDE_DIR}
 )
 
 ##############
 # application
 
 add_executable(Mandelbrot
-  main.cpp
-  MandelDrawer.cpp
-  MandelThread.cpp
-  MandelMap.cpp
-  text_rendering.cpp
+  src/main.cpp
+  src/MandelDrawer.cpp
+  src/MandelThread.cpp
+  src/MandelMap.cpp
+  src/text_rendering.cpp
 )
 
 target_link_libraries(Mandelbrot
-  ${SDL2_LIBRARY}
   ${Boost_LIBRARIES}
+  ${SDL2_LIBRARY}
 )
