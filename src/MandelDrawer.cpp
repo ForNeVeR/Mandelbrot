@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2010-2025 Friedrich von Never <friedrich@fornever.me>
 //
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: MIT
 
 /* Main file for class that performs drawing operations. */
 #include "MandelDrawer.h"

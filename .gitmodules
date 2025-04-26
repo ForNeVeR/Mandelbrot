@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2017-2025 Friedrich von Never <friedrich@fornever.me>
 #
-# SPDX-License-Identifier: GPL-3.0-only
+# SPDX-License-Identifier: MIT
 
 [submodule "cmake"]
 	path = cmake
