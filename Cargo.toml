@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+#
+# SPDX-License-Identifier: MIT
+
+[package]
+name = "Mandelbrot"
+version = "0.0.0"
+edition = "2024"
+
+[dependencies]

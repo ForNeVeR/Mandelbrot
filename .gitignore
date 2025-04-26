@@ -2,8 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
-/build/
+# Cargo:
+/target
 
-# CLion stuff:
+# RustRover:
 /.idea/
-/cmake-build-debug/
