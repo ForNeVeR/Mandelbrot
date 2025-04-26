@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2010-2025 Mandelbrot contributors <https://github.com/ForNeVeR/Mandelbrot>
+// SPDX-FileCopyrightText: 2010-2025 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -50,29 +50,3 @@ MandelThread::~MandelThread()
     delete freeMutex;
     delete drawer;
 }
-
-// SPDX-SnippetBegin
-// SPDX-SnippetCopyrightText: 2010 arsenicum <https://github.com/arsenicum>
-void MandelThread::work(MandelThread *this_mthread)
-{
-    for(;;)
-    {
-        // Wait for mutex to be opened:
-        this_mthread->workMutex->lock();
-        try
-        {
-            boost::this_thread::interruption_point();
-        }
-        catch(const boost::thread_interrupted &)
-        {
-            this_mthread->workMutex->unlock();
-            throw;
-        }
-
-        // Do work:
-        this_mthread->drawer->calculate(this_mthread->scale);
-        
-        this_mthread->freeMutex->unlock();
-    }
-}
-// SPDX-SnippetEnd
