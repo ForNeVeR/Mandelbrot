@@ -5,19 +5,21 @@
 extern crate sdl2;
 
 use crate::Mode::{Fullscreen, Windowed};
+use sdl2::event::Event;
+use sdl2::pixels::PixelFormatEnum::ARGB8888;
 
-const DEFAULT_VIDEO_WIDTH: i32 = 400;
-const DEFAULT_VIDEO_HEIGHT: i32 = 400;
+const DEFAULT_VIDEO_WIDTH: u32 = 400;
+const DEFAULT_VIDEO_HEIGHT: u32 = 400;
+const DEFAULT_CENTER_X: f64 = 0.001643721971153;
+const DEFAULT_CENTER_Y: f64 = 0.822467633298876;
 
 #[derive(Debug)]
 enum Mode {
-    Windowed(i32, i32),
+    Windowed(u32, u32),
     Fullscreen,
 }
 
 fn main() -> Result<(), String> {
-    let sdl_context = sdl2::init()?;
-
     let args: Vec<String> = std::env::args().collect();
     let mode = match args.len() {
         1 => Windowed(DEFAULT_VIDEO_WIDTH, DEFAULT_VIDEO_HEIGHT),
@@ -29,7 +31,43 @@ fn main() -> Result<(), String> {
         _ => return Err(String::from("Usage: Mandelbrot [W H] | [--full]"))
     };
 
-    println!("TODO: Initialize SDL with mode: {:?}", mode);
+    let sdl = sdl2::init()?;
+    let video_subsystem = sdl.video()?;
+    let window = initialize_window(video_subsystem, mode)?;
+    let canvas = window.into_canvas().build().map_err(|e| e.to_string())?;
+    let (w, h) = canvas.window().size();
+    let creator = canvas.texture_creator();
+    let texture = creator.create_texture_streaming(ARGB8888, w, h) .map_err(|e| e.to_string())?;
+
+    main_loop(&sdl)?;
+
+    Ok(())
+}
+
+fn initialize_window(video_subsystem: sdl2::VideoSubsystem, mode: Mode) -> Result<sdl2::video::Window, String> {
+    let (width, height) = match mode {
+        Windowed(w, h) => (w, h),
+        Fullscreen => (DEFAULT_VIDEO_WIDTH, DEFAULT_VIDEO_HEIGHT),
+    };
+
+    let mut builder = video_subsystem.window("Mandelbrot", width, height);
+    match mode {
+        Fullscreen => builder.fullscreen_desktop(),
+        Windowed(_, _) => builder.position_centered()
+    }.build().map_err(|e| e.to_string())
+}
+
+fn main_loop(sdl: &sdl2::Sdl) -> Result<(), String> {
+    let mut pump = sdl.event_pump()?;
+    loop {
+        let event = pump.wait_event();
+        match event {
+            Event::KeyDown { .. } => {}
+            Event::Quit { .. } => break,
+            _ => {}
+        }
+    };
     
+    println!("Bye!");
     Ok(())
 }
