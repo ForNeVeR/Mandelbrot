@@ -1,0 +1,10 @@
+version = 1
+SPDX-PackageName = "Mandelbrot"
+SPDX-PackageSupplier = "Mandelbrot contributors <https://github.com/ForNeVeR/Mandelbrot>"
+SPDX-PackageDownloadLocation = "https://github.com/ForNeVeR/Mandelbrot"
+
+[[annotations]]
+path = ".idea/**/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2025 Friedrich von Never <friedrich@fornever.me>"
+SPDX-License-Identifier = "MIT"

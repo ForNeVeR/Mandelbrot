@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2010-2025 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: GPL-3.0-only
+
 #include "text_rendering.h"
 
 #include "font.h"

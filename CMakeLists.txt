@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2010-2025 Mandelbrot contributors <https://github.com/ForNeVeR/Mandelbrot>
+#
+# SPDX-License-Identifier: GPL-3.0-only
+
 cmake_minimum_required(VERSION 2.8)
 
 ##########

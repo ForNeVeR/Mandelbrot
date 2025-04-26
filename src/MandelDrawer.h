@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2010-2025 Friedrich von Never <friedrich@fornever.me>
+ *
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 /* Header file for class that performs drawing operations. */
 #ifndef MANDELDRAWER_H
 #define MANDELDRAWER_H

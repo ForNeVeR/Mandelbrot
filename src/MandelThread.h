@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2010-2025 Friedrich von Never <friedrich@fornever.me>
+ *
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 /* MandelThread is clas for multi-threaded calculation of Mandelbrot set
  * points. */
 #ifndef MANDELTHREAD_H

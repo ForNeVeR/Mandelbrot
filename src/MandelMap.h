@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2010-2025 Friedrich von Never <friedrich@fornever.me>
+ *
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 /* MandelMap is a class for storing results of MandelThreads work. It stores
  * count of iterations for every pixel of the screen. */
 #ifndef MANDELMAP_H

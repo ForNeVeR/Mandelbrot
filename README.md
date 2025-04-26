@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2010-2025 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: GPL-3.0-only
+-->
+
 Mandelbrot
 ==========
 
@@ -61,11 +67,8 @@ Default zoom position in selected for some interesting figures showing in it.
 
 License
 -------
-Most of the files in the project are distributed under the terms of [the GPL license][docs.license].
-
 The license indication in the project's sources is compliant with the [REUSE specification v3.3][reuse.spec].
 
-[docs.license]: License.txt
 [reuse.spec]: https://reuse.software/spec-3.3/
 [screenshot]: docs/screenshot.png
 [vcpkg]: https://github.com/Microsoft/vcpkg

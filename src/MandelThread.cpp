@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2010-2025 Mandelbrot contributors <https://github.com/ForNeVeR/Mandelbrot>
+//
+// SPDX-License-Identifier: GPL-3.0-only
+
 #include "MandelThread.h"
 
 #include "MandelDrawer.h"
@@ -47,6 +51,8 @@ MandelThread::~MandelThread()
     delete drawer;
 }
 
+// SPDX-SnippetBegin
+// SPDX-SnippetCopyrightText: 2010 arsenicum <https://github.com/arsenicum>
 void MandelThread::work(MandelThread *this_mthread)
 {
     for(;;)
@@ -69,3 +75,4 @@ void MandelThread::work(MandelThread *this_mthread)
         this_mthread->freeMutex->unlock();
     }
 }
+// SPDX-SnippetEnd

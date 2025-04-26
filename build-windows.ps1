@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2017-2025 Friedrich von Never <friedrich@fornever.me>
+#
+# SPDX-License-Identifier: GPL-3.0-only
+
 <#
 .SYNOPSIS
     Downloads and build the Mandelbrot dependencies and build the program.

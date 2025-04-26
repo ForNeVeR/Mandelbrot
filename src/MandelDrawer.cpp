@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2010-2025 Mandelbrot contributors <https://github.com/ForNeVeR/Mandelbrot>
+//
+// SPDX-License-Identifier: GPL-3.0-only
+
 /* Main file for class that performs drawing operations. */
 #include "MandelDrawer.h"
 
@@ -34,6 +38,8 @@ double MandelDrawer::scaleY(int y, double scale) const
 }
 
 /* Draws screen pixels from line start_y to line end_y with specified scale. */
+// SPDX-SnippetBegin
+// SPDX-SnippetCopyrightText: 2010 arsenicum <https://github.com/arsenicum>
 void MandelDrawer::calculate(double scale)
 {
     int square_size = min(map->getWidth(), map->getHeight());
@@ -65,3 +71,4 @@ void MandelDrawer::calculate(double scale)
         }
     }
 }
+// SPDX-SnippetEnd
