@@ -1,4 +1,4 @@
-﻿#include "MandelMap.h"
+#include "MandelMap.h"
 
 #include <cassert>
 

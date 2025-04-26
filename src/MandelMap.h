@@ -1,4 +1,4 @@
-﻿/* MandelMap is a class for storing results of MandelThreads work. It stores
+/* MandelMap is a class for storing results of MandelThreads work. It stores
  * count of iterations for every pixel of the screen. */
 #ifndef MANDELMAP_H
 #define MANDELMAP_H
