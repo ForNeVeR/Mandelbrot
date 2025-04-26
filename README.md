@@ -14,25 +14,9 @@ of set, it will be drawn with black color.
 
 ![Screenshot][screenshot]
 
-Build
------
-
-**On Windows**, install [vcpkg] and invoke `build-windows.ps1` script. Consult
-the script parameters for additional information.
-
-Build the generated solution file, `build/Mandelbrot.sln`, using the following shell command (use the **Developer Command Prompt for VS 2022):
-```console
-$ msbuild -target:Build -property:Configuration=Release build/Mandelbrot.sln
-```
-
-**On Linux**, install the necessary developer packages and start CMake
-afterwards:
-
-```
-$ mkdir build
-$ cd build
-$ cmake ..
-```
+Installation
+------------
+Download the latest version of the binaries from CI, or build from source (see [the contributor guide][docs.contributing] for details)
 
 Starting the program
 --------------------
@@ -67,10 +51,15 @@ Default zoom position in selected for some interesting figures showing in it.
 - **Arrow keys**: change projection center
 - **ESC**: exit
 
+Documentation
+-------------
+- [Contributor Guide][docs.contributing]
+
 License
 -------
 The license indication in the project's sources is compliant with the [REUSE specification v3.3][reuse.spec].
 
+[docs.contributing]: CONTRIBUTING.md
 [reuse.spec]: https://reuse.software/spec-3.3/
 [screenshot]: docs/screenshot.png
 [vcpkg]: https://github.com/Microsoft/vcpkg

@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
+extern crate sdl2;
+
 fn main() {
-    println!("Hello, world!");
+    let sdl_context = sdl2::init().unwrap();
 }
