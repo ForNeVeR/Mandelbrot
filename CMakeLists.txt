@@ -39,9 +39,7 @@ include_directories(
 add_executable(Mandelbrot
   src/main.cpp
   src/MandelDrawer.cpp
-  src/MandelDrawer.calculate.cpp
   src/MandelThread.cpp
-  src/MandelThread.work.cpp
   src/MandelMap.cpp
   src/text_rendering.cpp
 )

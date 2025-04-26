@@ -5,8 +5,6 @@
 /* Main file for class that performs drawing operations. */
 #include "MandelDrawer.h"
 
-#include <algorithm>
-
 #include "MandelMap.h"
 
 using namespace std;
@@ -36,3 +34,5 @@ double MandelDrawer::scaleY(int y, double scale) const
 {
     return center_y - y * scale / map->getHeight() + scale / 2;
 }
+
+#include "MandelDrawer.calculate.hpp"

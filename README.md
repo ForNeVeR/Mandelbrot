@@ -20,8 +20,10 @@ Build
 **On Windows**, install [vcpkg] and invoke `build-windows.ps1` script. Consult
 the script parameters for additional information.
 
-After that, the program can be built with Visual Studio 2017; open
-`build/Mandelbrot.sln` file.
+Build the generated solution file, `build/Mandelbrot.sln`, using the following shell command (use the **Developer Command Prompt for VS 2022):
+```console
+$ msbuild -target:Build -property:Configuration=Release build/Mandelbrot.sln
+```
 
 **On Linux**, install the necessary developer packages and start CMake
 afterwards:

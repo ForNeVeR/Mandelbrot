@@ -106,7 +106,7 @@ void mainLoop(
 
     MandelMap map(screenWidth, screenHeight);
 
-    int thread_count = thread::hardware_concurrency();
+    int thread_count = boost::thread::hardware_concurrency();
     vector<MandelThread *> threads;
     for(int i = 0; i < thread_count; ++i)
     {

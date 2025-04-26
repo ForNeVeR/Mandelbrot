@@ -2,10 +2,13 @@
 //
 // SPDX-License-Identifier: GPL-3.0-only
 
+#include "MandelDrawer.h"
+#include <algorithm>
+
 /* Draws screen pixels from line start_y to line end_y with specified scale. */
 void MandelDrawer::calculate(double scale)
 {
-    int square_size = min(map->getWidth(), map->getHeight());
+    int square_size = std::min(map->getWidth(), map->getHeight());
     double scale_x = scale * map->getWidth() / square_size;
     double scale_y = scale * map->getHeight() / square_size;
     for(int x0 = 0; x0 < map->getWidth(); ++x0)

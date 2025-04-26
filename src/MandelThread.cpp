@@ -11,11 +11,11 @@ MandelThread::MandelThread(MandelMap *map, double center_x, double center_y,
     int from_y, int to_y)
 {
     drawer = new MandelDrawer(map, center_x, center_y, from_y, to_y);
-    
+
     workMutex = new boost::mutex();
     workMutex->lock();
     freeMutex = new boost::mutex();
-    
+
     thread = new boost::thread(work, this);
 }
 
@@ -50,3 +50,5 @@ MandelThread::~MandelThread()
     delete freeMutex;
     delete drawer;
 }
+
+#include "MandelThread.work.hpp"

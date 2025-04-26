@@ -65,7 +65,7 @@ try {
     exec $cmake ../ `
         "-DCMAKE_BUILD_TYPE=$BuildType" `
         "-DCMAKE_TOOLCHAIN_FILE=$VcpkgToolchainFile" `
-        -G "Visual Studio 15 2017 Win64"
+        -G "Visual Studio 17 2022"
 } finally {
     Pop-Location
 }
