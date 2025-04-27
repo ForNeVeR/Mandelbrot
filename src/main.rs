@@ -2,11 +2,14 @@
 //
 // SPDX-License-Identifier: MIT
 
+mod mandel_map;
+
 extern crate sdl2;
 
 use crate::Mode::{Fullscreen, Windowed};
 use sdl2::event::Event;
 use sdl2::pixels::PixelFormatEnum::ARGB8888;
+use crate::mandel_map::MandelMap;
 
 const DEFAULT_VIDEO_WIDTH: u32 = 400;
 const DEFAULT_VIDEO_HEIGHT: u32 = 400;
@@ -39,7 +42,7 @@ fn main() -> Result<(), String> {
     let creator = canvas.texture_creator();
     let texture = creator.create_texture_streaming(ARGB8888, w, h) .map_err(|e| e.to_string())?;
 
-    main_loop(&sdl)?;
+    main_loop(&sdl, w, h)?;
 
     Ok(())
 }
@@ -57,7 +60,11 @@ fn initialize_window(video_subsystem: sdl2::VideoSubsystem, mode: Mode) -> Resul
     }.build().map_err(|e| e.to_string())
 }
 
-fn main_loop(sdl: &sdl2::Sdl) -> Result<(), String> {
+fn main_loop(sdl: &sdl2::Sdl, screen_width: u32, screen_height: u32) -> Result<(), String> {
+    let mut center_x = DEFAULT_CENTER_X;
+    let mut center_y = DEFAULT_CENTER_Y;
+    let mut map = MandelMap::new(screen_width as usize, screen_height as usize);
+    
     let mut pump = sdl.event_pump()?;
     loop {
         let event = pump.wait_event();
