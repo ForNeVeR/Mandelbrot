@@ -2,14 +2,15 @@
 //
 // SPDX-License-Identifier: MIT
 
-mod mandel_map;
-
 extern crate sdl2;
+mod calculation;
+mod render;
 
 use crate::Mode::{Fullscreen, Windowed};
 use sdl2::event::Event;
+use sdl2::keyboard::Keycode;
 use sdl2::pixels::PixelFormatEnum::ARGB8888;
-use crate::mandel_map::MandelMap;
+use crate::calculation::MandelMap;
 
 const DEFAULT_VIDEO_WIDTH: u32 = 400;
 const DEFAULT_VIDEO_HEIGHT: u32 = 400;
@@ -67,9 +68,20 @@ fn main_loop(sdl: &sdl2::Sdl, screen_width: u32, screen_height: u32) -> Result<(
     
     let mut pump = sdl.event_pump()?;
     loop {
+        update_map();
+        draw_screen();
+        
         let event = pump.wait_event();
         match event {
-            Event::KeyDown { .. } => {}
+            Event::KeyDown { keycode: Some(keycode), .. } => {
+                match keycode {
+                    Keycode::Escape => break,
+                    Keycode::Up => center_y  += 0.1 * get_scale(),
+                    Keycode::Down => center_y -= 0.1 * get_scale(),
+                    Keycode::Left => center_x -= 0.1 * get_scale(),
+                    Keycode::Right => center_x += 0.1 * get_scale(),
+                }
+            }
             Event::Quit { .. } => break,
             _ => {}
         }
