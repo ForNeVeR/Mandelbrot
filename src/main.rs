@@ -5,12 +5,19 @@
 extern crate sdl2;
 mod calculation;
 mod render;
+mod text;
+mod font;
 
+use crate::calculation::{update_map, MandelMap};
+use crate::render::{draw_screen, RenderInfo};
 use crate::Mode::{Fullscreen, Windowed};
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
+use sdl2::pixels::PixelFormat;
 use sdl2::pixels::PixelFormatEnum::ARGB8888;
-use crate::calculation::MandelMap;
+use sdl2::render::{Texture, WindowCanvas};
+use sdl2::Sdl;
+use threadpool::ThreadPool;
 
 const DEFAULT_VIDEO_WIDTH: u32 = 400;
 const DEFAULT_VIDEO_HEIGHT: u32 = 400;
@@ -38,12 +45,14 @@ fn main() -> Result<(), String> {
     let sdl = sdl2::init()?;
     let video_subsystem = sdl.video()?;
     let window = initialize_window(video_subsystem, mode)?;
+    let pixel_format_enum = window.window_pixel_format();
     let canvas = window.into_canvas().build().map_err(|e| e.to_string())?;
     let (w, h) = canvas.window().size();
     let creator = canvas.texture_creator();
     let texture = creator.create_texture_streaming(ARGB8888, w, h) .map_err(|e| e.to_string())?;
+    let pixel_format = PixelFormat::try_from(pixel_format_enum)?;
 
-    main_loop(&sdl, w, h)?;
+    main_loop(&sdl, w, h, pixel_format, texture, canvas)?;
 
     Ok(())
 }
@@ -61,25 +70,37 @@ fn initialize_window(video_subsystem: sdl2::VideoSubsystem, mode: Mode) -> Resul
     }.build().map_err(|e| e.to_string())
 }
 
-fn main_loop(sdl: &sdl2::Sdl, screen_width: u32, screen_height: u32) -> Result<(), String> {
+fn main_loop(
+    sdl: &Sdl,
+    screen_width: u32,
+    screen_height: u32,
+    pixel_format: PixelFormat,
+    texture: Texture,
+    mut canvas: WindowCanvas
+) -> Result<(), String> {
     let mut center_x = DEFAULT_CENTER_X;
     let mut center_y = DEFAULT_CENTER_Y;
     let mut map = MandelMap::new(screen_width as usize, screen_height as usize);
     
     let mut pump = sdl.event_pump()?;
+    let pool = ThreadPool::new(num_cpus::get());
+    let mut render_info = RenderInfo::new();
+    let mut texture = texture;
     loop {
-        update_map();
-        draw_screen();
+        let scale = get_scale(sdl);
+        update_map(&mut map, &pool, scale, center_x, center_y);
+        render_info = draw_screen(sdl, render_info, &map, &pixel_format, &mut texture, &mut canvas, scale);
         
         let event = pump.wait_event();
         match event {
             Event::KeyDown { keycode: Some(keycode), .. } => {
                 match keycode {
                     Keycode::Escape => break,
-                    Keycode::Up => center_y  += 0.1 * get_scale(),
-                    Keycode::Down => center_y -= 0.1 * get_scale(),
-                    Keycode::Left => center_x -= 0.1 * get_scale(),
-                    Keycode::Right => center_x += 0.1 * get_scale(),
+                    Keycode::Up => center_y += 0.1 * get_scale(sdl),
+                    Keycode::Down => center_y -= 0.1 * get_scale(sdl),
+                    Keycode::Left => center_x -= 0.1 * get_scale(sdl),
+                    Keycode::Right => center_x += 0.1 * get_scale(sdl),
+                    _ => {}
                 }
             }
             Event::Quit { .. } => break,
@@ -89,4 +110,9 @@ fn main_loop(sdl: &sdl2::Sdl, screen_width: u32, screen_height: u32) -> Result<(
     
     println!("Bye!");
     Ok(())
+}
+
+const SPEED: f64 = 1.1;
+fn get_scale(sdl: &Sdl) -> f64 {
+    6.0 / SPEED.powf(sdl.timer().unwrap().ticks() as f64 / 300.0)
 }

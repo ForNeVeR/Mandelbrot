@@ -2,16 +2,16 @@
 //
 // SPDX-License-Identifier: MIT
 
-use std::cmp::min;
-use std::sync::{Arc, Barrier};
 use sdl2::pixels::PixelFormat;
+use std::cmp::min;
 use threadpool::ThreadPool;
+use threadpool_scope::scope_with;
 
 const MAX_ITERATIONS: i32 = 256;
 
 pub struct MandelMap {
-    width: usize,
-    height: usize,
+    pub width: usize,
+    pub height: usize,
     data: Vec<i32>,
     min: Option<i32>,
     max: Option<i32>,
@@ -34,7 +34,7 @@ impl MandelMap {
         self.data[y * self.width + x] = value;
     }
 
-    fn draw(&self, pixel_format: PixelFormat, pixels: &mut Vec<u32>) {
+    pub fn draw(&self, pixel_format: &PixelFormat, pixels: &mut Vec<u32>) {
         panic!("Not implemented");
     }
 
@@ -43,55 +43,55 @@ impl MandelMap {
     }
 }
 
-fn update_map(map: &'static mut MandelMap, pool: ThreadPool, scale: f64, center_x: f64, center_y: f64) {
+pub fn update_map(map: &mut MandelMap, pool: &ThreadPool, scale: f64, center_x: f64, center_y: f64) {
     let thread_count = pool.max_count();
-    let barrier = Arc::new(Barrier::new(thread_count));
-    let mut data = map.data.as_mut_slice();
-    let rows_per_thread = map.height / thread_count;
-    for i in 0..thread_count {
-        let data_slice = if i == thread_count - 1 {
-            let head = data;
-            data = &mut [];
-            head
-        } else {
-            let (head, rest) = data.split_at_mut(rows_per_thread * map.width);
-            data = rest;
-            head
-        };
+    let width = map.width;
+    let height = map.height;
+    
+    scope_with(pool, |scope| {
+        let mut data = map.data.as_mut_slice();
+        let rows_per_thread = map.height / thread_count;
+    
+        for i in 0..thread_count {
+            let data_slice = if i == thread_count - 1 {
+                let head = data;
+                data = &mut [];
+                head
+            } else {
+                let (head, rest) = data.split_at_mut(rows_per_thread * map.width);
+                data = rest;
+                head
+            };
 
-        let from_y = map.height * i / thread_count;
-        let to_y = if i == thread_count - 1 { map.height } else { map.height * (i + 1) / thread_count };
+            let from_y = map.height * i / thread_count;
+            let to_y = if i == thread_count - 1 { map.height } else { map.height * (i + 1) / thread_count };
 
-        let barrier = barrier.clone();
-
-        launch_calculation(barrier, from_y, to_y, &pool, scale, center_x, center_y, map.width, map.height, data_slice);
-    }
-
-    barrier.wait(); // wait for all the workers to report the results
-}
-
-fn launch_calculation(barrier: Arc<Barrier>,
-                      from_y: usize, to_y: usize,
-                      pool: &ThreadPool,
-                      scale: f64,
-                      center_x: f64, center_y: f64,
-                      width: usize, height: usize,
-                      data: &'static mut [i32]) {
-    assert!(from_y <= to_y);
-    let barrier = barrier.clone();
-    pool.execute(move || {
-        for y in from_y..=to_y {
-            for x in 0..width {
-                let map_dimension = min(width, height) as f64;
-                let scale_x = scale * width as f64 / map_dimension;
-                let scale_y = scale * height as f64 / map_dimension;
-                data[(y - from_y) * width + x] = mandelbrot_depth(x, y, center_x, center_y, scale_x, scale_y, width, height);
-            }
+            scope.execute(move || {
+                calculate(from_y, to_y, scale, center_x, center_y, width, height, data_slice);
+            });
         }
-        barrier.wait();
-    })
+    });
+    pool.join();
 }
 
+fn calculate(
+    from_y: usize, to_y: usize,
+    scale: f64,
+    center_x: f64, center_y: f64,
+    width: usize, height: usize,
+    data: &mut [i32]
+) {
+    assert!(from_y <= to_y);
+    for y in from_y..=to_y {
+        for x in 0..width {
+            let map_dimension = min(width, height) as f64;
+            let scale_x = scale * width as f64 / map_dimension;
+            let scale_y = scale * height as f64 / map_dimension;
+            data[(y - from_y) * width + x] = mandelbrot_depth(x, y, center_x, center_y, scale_x, scale_y, width, height);
+        }
+    }
+}
+    
 fn mandelbrot_depth(x: usize, y: usize,
                     center_x: f64, center_y: f64,
                     scale_x: f64, scale_y: f64,
