@@ -17,7 +17,6 @@ use sdl2::pixels::PixelFormat;
 use sdl2::pixels::PixelFormatEnum::ARGB8888;
 use sdl2::render::{Texture, WindowCanvas};
 use sdl2::Sdl;
-use threadpool::ThreadPool;
 
 const DEFAULT_VIDEO_WIDTH: u32 = 400;
 const DEFAULT_VIDEO_HEIGHT: u32 = 400;
@@ -83,12 +82,11 @@ fn main_loop(
     let mut map = MandelMap::new(screen_width as usize, screen_height as usize);
     
     let mut pump = sdl.event_pump()?;
-    let pool = ThreadPool::new(num_cpus::get());
     let mut render_info = RenderInfo::new();
     let mut texture = texture;
     loop {
         let scale = get_scale(sdl);
-        update_map(&mut map, &pool, scale, center_x, center_y);
+        update_map(&mut map, scale, center_x, center_y);
         render_info = draw_screen(sdl, render_info, &map, &pixel_format, &mut texture, &mut canvas, scale);
         
         let event = pump.wait_event();

@@ -2,10 +2,10 @@
 //
 // SPDX-License-Identifier: MIT
 
+use rayon::iter::*;
+use rayon::prelude::*;
 use sdl2::pixels::PixelFormat;
 use std::cmp::min;
-use threadpool::ThreadPool;
-use threadpool_scope::scope_with;
 
 const MAX_ITERATIONS: i32 = 256;
 
@@ -43,52 +43,33 @@ impl MandelMap {
     }
 }
 
-pub fn update_map(map: &mut MandelMap, pool: &ThreadPool, scale: f64, center_x: f64, center_y: f64) {
-    let thread_count = pool.max_count();
+pub fn update_map(map: &mut MandelMap, scale: f64, center_x: f64, center_y: f64) {
     let width = map.width;
     let height = map.height;
-    
-    scope_with(pool, |scope| {
-        let mut data = map.data.as_mut_slice();
-        let rows_per_thread = map.height / thread_count;
-    
-        for i in 0..thread_count {
-            let data_slice = if i == thread_count - 1 {
-                let head = data;
-                data = &mut [];
-                head
-            } else {
-                let (head, rest) = data.split_at_mut(rows_per_thread * map.width);
-                data = rest;
-                head
-            };
 
-            let from_y = map.height * i / thread_count;
-            let to_y = if i == thread_count - 1 { map.height } else { map.height * (i + 1) / thread_count };
-
-            scope.execute(move || {
-                calculate(from_y, to_y, scale, center_x, center_y, width, height, data_slice);
-            });
-        }
-    });
-    pool.join();
+    let mut chunks = map.data.par_chunks_exact_mut(width);
+    assert!(chunks.take_remainder().is_empty());
+    chunks
+        .enumerate()
+        .for_each(|(y, line)| {
+            calculate(y, scale, center_x, center_y, width, height, line);
+        });
 }
 
 fn calculate(
-    from_y: usize, to_y: usize,
+    y: usize,
     scale: f64,
     center_x: f64, center_y: f64,
     width: usize, height: usize,
     data: &mut [i32]
 ) {
-    assert!(from_y <= to_y);
-    for y in from_y..=to_y {
-        for x in 0..width {
-            let map_dimension = min(width, height) as f64;
-            let scale_x = scale * width as f64 / map_dimension;
-            let scale_y = scale * height as f64 / map_dimension;
-            data[(y - from_y) * width + x] = mandelbrot_depth(x, y, center_x, center_y, scale_x, scale_y, width, height);
-        }
+    assert_eq!(data.len(), width);
+    
+    for x in 0..width {
+        let map_dimension = min(width, height) as f64;
+        let scale_x = scale * width as f64 / map_dimension;
+        let scale_y = scale * height as f64 / map_dimension;
+        data[x] = mandelbrot_depth(x, y, center_x, center_y, scale_x, scale_y, width, height);
     }
 }
     

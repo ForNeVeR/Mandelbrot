@@ -9,6 +9,4 @@ edition = "2024"
 
 [dependencies]
 sdl2 = { version = "0.37.0", features = ["bundled"] }
-threadpool = { version = "1.8.1" }
-num_cpus = "1.16.0"
-threadpool_scope = "0.1.0"
+rayon = "1.10.0"
