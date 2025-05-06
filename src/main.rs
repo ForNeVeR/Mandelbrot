@@ -87,7 +87,7 @@ fn main_loop(
     loop {
         let scale = get_scale(sdl);
         update_map(&mut map, scale, center_x, center_y);
-        render_info = draw_screen(sdl, render_info, &map, &pixel_format, &mut texture, &mut canvas, scale);
+        render_info = draw_screen(sdl, render_info, &mut map, &pixel_format, &mut texture, &mut canvas, scale);
         
         let event = pump.wait_event();
         match event {

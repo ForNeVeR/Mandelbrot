@@ -24,7 +24,7 @@ impl RenderInfo {
 pub fn draw_screen(
     sdl: &Sdl,
     render_info: RenderInfo,
-    map: &MandelMap,
+    map: &mut MandelMap,
     pixel_format: &PixelFormat,
     texture: &mut Texture,
     canvas: &mut WindowCanvas,
@@ -37,9 +37,9 @@ pub fn draw_screen(
     render_info
 }
 
-fn generate_pixels(map: &MandelMap, pixel_format: &PixelFormat) -> Vec<u32> {
-    let mut pixels = Vec::with_capacity(map.width * map.height);
-    map.draw(pixel_format, &mut pixels);
+fn generate_pixels(map: &mut MandelMap, pixel_format: &PixelFormat) -> Vec<u32> {
+    let mut pixels = vec![0u32; map.width * map.height];
+    map.draw(pixel_format, pixels.as_mut_slice());
     pixels
 }
 

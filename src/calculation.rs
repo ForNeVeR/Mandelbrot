@@ -4,7 +4,7 @@
 
 use rayon::iter::*;
 use rayon::prelude::*;
-use sdl2::pixels::PixelFormat;
+use sdl2::pixels::{Color, PixelFormat};
 use std::cmp::min;
 
 const MAX_ITERATIONS: i32 = 256;
@@ -30,16 +30,54 @@ impl MandelMap {
         }
     }
 
-    fn set(&mut self, x: usize, y: usize, value: i32) {
-        self.data[y * self.width + x] = value;
+    fn get(&self, x: usize, y: usize) -> i32 {
+        self.data[x + y * self.width]
     }
 
-    pub fn draw(&self, pixel_format: &PixelFormat, pixels: &mut Vec<u32>) {
-        panic!("Not implemented");
+    pub fn draw(&mut self, format: &PixelFormat, pixels: &mut [u32]) {
+        self.min = None;
+        self.max = None;
+        
+        let max_iteration = self.get_max();
+        for y in 0..self.height {
+            for x in 0..self.width {
+                let grade = self.get(x, y) as f64 / max_iteration as f64;
+                let r = grade * 256.0;
+                let g = 128.0 + grade * 128.0;
+                let b = 256.0 - grade * 256.0;
+                let color = Color::RGB(r as u8, g as u8, b as u8);
+                pixels[x + y * self.width] = color.to_u32(format);
+            }
+        }
+        self.get_min();
     }
 
-    fn calc_min_max(&mut self) {
-        panic!("Not implemented");
+    fn cache_min_max(&mut self) -> (i32, i32) {
+        let mut min = i32::MAX;
+        let mut max = i32::MIN;
+        for value in &self.data {
+            if *value < min {
+                min = *value;
+            }
+            if *value > max {
+                max = *value;
+            }
+        }
+        (min, max)
+    }
+
+    fn get_min(&mut self) -> i32 {
+        self.min.unwrap_or_else(|| {
+            let (min, _) = self.cache_min_max();
+            min
+        })
+    }
+    
+    fn get_max(&mut self) -> i32 {
+        self.max.unwrap_or_else(|| {
+            let (_, max) = self.cache_min_max();
+            max
+        })
     }
 }
 
