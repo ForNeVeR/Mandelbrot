@@ -1,7 +1,0 @@
-# SPDX-FileCopyrightText: 2017-2025 Friedrich von Never <friedrich@fornever.me>
-#
-# SPDX-License-Identifier: MIT
-
-[submodule "cmake"]
-	path = cmake
-	url = https://github.com/tcbrindle/sdl2-cmake-scripts.git
