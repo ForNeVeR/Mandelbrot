@@ -57,9 +57,12 @@ Documentation
 
 License
 -------
+The project is distributed under the terms of [the MIT license][docs.license].
+
 The license indication in the project's sources is compliant with the [REUSE specification v3.3][reuse.spec].
 
 [docs.contributing]: CONTRIBUTING.md
+[docs.license]: LICENSES/MIT.txt
 [reuse.spec]: https://reuse.software/spec-3.3/
 [screenshot]: docs/screenshot.png
 [vcpkg]: https://github.com/Microsoft/vcpkg
