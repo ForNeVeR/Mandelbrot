@@ -27,3 +27,7 @@ Run the following shell command:
 ```
 $ cargo build
 ```
+To build the release version:
+```
+$ cargo build --release
+```

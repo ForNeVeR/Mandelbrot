@@ -65,4 +65,3 @@ The license indication in the project's sources is compliant with the [REUSE spe
 [docs.license]: LICENSES/MIT.txt
 [reuse.spec]: https://reuse.software/spec-3.3/
 [screenshot]: docs/screenshot.png
-[vcpkg]: https://github.com/Microsoft/vcpkg
