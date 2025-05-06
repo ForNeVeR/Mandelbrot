@@ -53,11 +53,11 @@ fn calculate_render_info(sdl: &Sdl, pixel_format: &PixelFormat, render_info: Ren
     if render_info.frame > RECOUNT_THRESHOLD {
         let tick = sdl.timer().unwrap().ticks();
         render_info.fps = render_info.frame as f64 * 1000.0 / (tick - render_info.last_tick) as f64;
-        
+
         render_info.frame = 0;
         render_info.last_tick = tick;
     }
-    
+
     let fps = format!("FPS: {:}", render_info.fps as u32);
     let output = format!("{}\nSCALE: {:.5}", fps, scale);
     render_text(pixel_format, output, screen_width, pixels);
