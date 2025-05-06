@@ -89,20 +89,22 @@ fn main_loop(
         update_map(&mut map, scale, center_x, center_y);
         render_info = draw_screen(sdl, render_info, &mut map, &pixel_format, &mut texture, &mut canvas, scale);
         
-        let event = pump.wait_event();
-        match event {
-            Event::KeyDown { keycode: Some(keycode), .. } => {
-                match keycode {
-                    Keycode::Escape => break,
-                    Keycode::Up => center_y += 0.1 * get_scale(sdl),
-                    Keycode::Down => center_y -= 0.1 * get_scale(sdl),
-                    Keycode::Left => center_x -= 0.1 * get_scale(sdl),
-                    Keycode::Right => center_x += 0.1 * get_scale(sdl),
-                    _ => {}
+        let event = pump.poll_event();
+        if let Some(event) = event {
+            match event {
+                Event::KeyDown { keycode: Some(keycode), .. } => {
+                    match keycode {
+                        Keycode::Escape => break,
+                        Keycode::Up => center_y += 0.1 * get_scale(sdl),
+                        Keycode::Down => center_y -= 0.1 * get_scale(sdl),
+                        Keycode::Left => center_x -= 0.1 * get_scale(sdl),
+                        Keycode::Right => center_x += 0.1 * get_scale(sdl),
+                        _ => {}
+                    }
                 }
-            }
-            Event::Quit { .. } => break,
-            _ => {}
+                Event::Quit { .. } => break,
+                _ => {}
+            }    
         }
     };
     
