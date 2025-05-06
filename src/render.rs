@@ -10,13 +10,15 @@ use sdl2::Sdl;
 
 pub struct RenderInfo {
     frame: u32,
-    last_tick: u32
+    last_tick: u32,
+    fps: f64
 }
 impl RenderInfo {
     pub fn new() -> Self {
         Self {
             frame: 0,
-            last_tick: 0
+            last_tick: 0,
+            fps: 0.0
         }
     }
 }
@@ -48,17 +50,16 @@ fn calculate_render_info(sdl: &Sdl, pixel_format: &PixelFormat, render_info: Ren
     render_info.frame += 1;
     const RECOUNT_THRESHOLD: u32 = 25;
     
-    let mut fps = String::new();
     if render_info.frame > RECOUNT_THRESHOLD {
         let tick = sdl.timer().unwrap().ticks();
-        let avg_fps = render_info.frame as f64 / (tick - render_info.last_tick) as f64;
-        fps = format!("FPS: {:}", avg_fps as u32);
+        render_info.fps = render_info.frame as f64 * 1000.0 / (tick - render_info.last_tick) as f64;
         
         render_info.frame = 0;
         render_info.last_tick = tick;
     }
     
-    let output = format!("{}\nSCALE:{:}", fps, scale);
+    let fps = format!("FPS: {:}", render_info.fps as u32);
+    let output = format!("{}\nSCALE: {:.5}", fps, scale);
     render_text(pixel_format, output, screen_width, pixels);
     render_info
 }

@@ -5,264 +5,264 @@
  */
 
 // This file used for storing font definition.
-type PixelArray = [[bool; 8]; 8];
+type PixelArray = [[u8; 8]; 8];
 
 const SPACE: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
 const DOT: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, false, true, true, false, false, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0]
 ];
 
 const COLON: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, false, true, true, false, false, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0]
 ];
 
 const MINUS: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
 const PLUS: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, false, false, false, false, false, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
 const ZERO: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const ONE: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, true, true, true, false, false, false],
-    [false, false, true, true, true, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, false, true, true, false, false, false],
-    [false, false, false, true, true, false, false, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0]
 ];
 
 const TWO: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, false, false, false, true, true, true, false],
-    [false, false, true, true, true, true, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 1, 1, 1, 0],
+    [0, 0, 1, 1, 1, 1, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const THREE: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, false, false, false, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const FOUR: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, false, false, false, false, true, true, false],
-    [false, false, false, false, false, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 1, 0]
 ];
 
 const FIVE: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, false, false, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const SIX: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const SEVEN: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, false, false, false, true, true, false],
-    [false, false, false, false, true, true, true, false],
-    [false, false, false, false, true, true, false, false],
-    [false, false, false, false, true, true, false, false],
-    [false, false, false, false, true, true, false, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 1, 1, 1, 0],
+    [0, 0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0, 0]
 ];
 
 const EIGHT: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const NINE: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, false, false, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const A_CAPITAL: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, false, false, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0]
 ];
 
 const C_CAPITAL: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const E_CAPITAL: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, true, true, true, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const F_CAPITAL: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, true, true, false, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0]
 ];
 
 const L_CAPITAL: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const P_CAPITAL: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, false, false, false, false, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0]
 ];
 
 const S_CAPITAL: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, false, false, false, false, false],
-    [false, true, true, true, true, true, true, false],
-    [false, false, false, false, false, true, true, false],
-    [false, true, true, true, true, true, true, false],
-    [false, true, true, true, true, true, true, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0]
 ];
 
 const UNKNOWN: PixelArray = [
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 1, 1, 1, 0]
 ];
 
-/// This function returns array 8x8 of bool values, where true means black color of
-/// pixel and false means transparent color of pixel.
-pub fn get_character(character: char) -> &'static PixelArray {
+/// This function returns array 8x8 of bool values, where 1 means black color of
+/// pixel and 0 means transparent color of pixel.
+pub fn get_glyph(character: char) -> &'static PixelArray {
     match character {
         ' ' => &SPACE,
         '.' => &DOT,

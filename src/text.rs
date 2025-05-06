@@ -2,31 +2,31 @@
 //
 // SPDX-License-Identifier: MIT
 
-use crate::font::get_character;
+use crate::font::get_glyph;
 use sdl2::pixels::{Color, PixelFormat};
 
 pub fn render_text(pixel_format: &PixelFormat, text: String, screen_width: usize, pixels: &mut [u32]) {
     const TOP_MARGIN: usize = 5;
     const RIGHT_MARGIN: usize = 5;
-    let mut y0 = TOP_MARGIN;
-    let mut x0 = screen_width - RIGHT_MARGIN;
+    const CHAR_SIZE: usize = 8;
 
-    for i in 0..text.len() {
-        let char = text.chars().nth(i).unwrap();
-        if char == '\n' {
-            y0 += 10;
-            x0 = screen_width - RIGHT_MARGIN;
-        } else {
-            let character = get_character(char);
-            for x in 0..8 {
-                for y in 0..8 {
-                    if character[x][y] {
+    let lines = text.lines();
+    for (l, line) in lines.enumerate() {
+        let glyph_base_y = TOP_MARGIN + l * 10;
+        
+        for i in 0..line.len() {
+            let glyph_base_x = screen_width - RIGHT_MARGIN - (line.len() - i) * CHAR_SIZE;
+            
+            let char = line.chars().nth(i).unwrap();
+            let glyph = get_glyph(char);
+            for x in 0..CHAR_SIZE {
+                for y in 0..CHAR_SIZE {
+                    if glyph[y][x] != 0 {
                         let color = Color::from((0, 0, 0)).to_u32(pixel_format);
-                        pixels[(y0 + y) * screen_width + x0 + x] = color;
+                        pixels[(glyph_base_y + y) * screen_width + glyph_base_x + x] = color;
                     }
                 }
             }
-            x0 -= 8;
         }
     }
 }
