@@ -15,28 +15,33 @@ on:
   workflow_dispatch:
 
 jobs:
-#  build:
-#    runs-on: windows-2025
-#    steps:
-#      - name: Check out the repository
-#        uses: actions/checkout@v4
-#
-#      - name: Set up Visual Studio environment
-#        uses: ilammy/msvc-dev-cmd@v1
-#
-#      - name: Prepare the dependencies
-#        shell: pwsh
-#        run: ./build-windows.ps1 -VcpkgToolchainFile 'C:\Vcpkg\scripts\buildsystems\vcpkg.cmake'
-#
-#      - name: Build
-#        shell: pwsh
-#        run: msbuild -target:Build -property:Configuration=Release .\build\Mandelbrot.sln
-#
-#      - name: Upload the artifacts
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: Mandelbrot.windows
-#          path: build/Release/*
+  build:
+    runs-on: windows-2025
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build
+        shell: pwsh
+        run: cargo build --release
+
+      - name: Upload the artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mandelbrot.windows
+          path: |
+            target/release/Mandelbrot.exe
+            target/release/Mandelbrot.pdb
+            target/release/SDL2.dll
 
   encoding:
     runs-on: ubuntu-24.04
