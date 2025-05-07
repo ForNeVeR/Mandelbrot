@@ -22,8 +22,6 @@ jobs:
           # renovate:
           - macos-15
           # renovate:
-          - macos-15-large
-          # renovate:
           - ubuntu-24.04
           # renovate:
           - ubuntu-24.04-arm
