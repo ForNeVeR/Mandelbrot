@@ -5,6 +5,7 @@
     ],
     "customManagers": [
         {
+            "description": "VerifyEncoding PowerShell module",
             "customType": "regex",
             "fileMatch": [
                 "^\\.github/workflows/.+\\.yml$"
@@ -14,6 +15,15 @@
             ],
             "datasourceTemplate": "nuget",
             "registryUrlTemplate": "https://www.powershellgallery.com/api/v2/"
+        },
+        {
+            "description": "GitHub Actions runner images",
+            "customType": "regex",
+            "fileMatch": ["^\\.github/workflows/.+\\.yml$"],
+            "matchStrings": [
+                "# renovate:\\s*\\n\\s*- (?<depName>\\S+?)-(?<currentValue>\\S+)"
+            ],
+            "datasourceTemplate": "github-runners"
         }
     ]
 }

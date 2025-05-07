@@ -16,7 +16,24 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2025
+    strategy:
+      matrix:
+        image:
+          # renovate:
+          - macos-15
+          # renovate:
+          - macos-15-large
+          # renovate:
+          - ubuntu-24.04
+          # renovate:
+          - ubuntu-24.04-arm
+          # renovate:
+          - windows-11-arm
+          # renovate:
+          - windows-2025
+      fail-fast: false
+    runs-on: ${{ matrix.image }}
+
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
