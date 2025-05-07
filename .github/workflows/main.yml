@@ -58,7 +58,6 @@ jobs:
           path: |
             target/release/Mandelbrot.exe
             target/release/Mandelbrot.pdb
-            target/release/SDL2.dll
 
   encoding:
     runs-on: ubuntu-24.04
