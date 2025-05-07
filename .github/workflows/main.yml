@@ -18,19 +18,30 @@ jobs:
   build:
     strategy:
       matrix:
-        image:
+        include:
           # renovate:
-          - macos-15
+          - runner: macos-15
+            os: macos
+            arch: aarch64
           # renovate:
-          - ubuntu-24.04
+          - runner: ubuntu-24.04
+            os: linux
+            arch: x86-64
           # renovate:
-          - ubuntu-24.04-arm
+          - runner: ubuntu-24.04-arm
+            os: linux
+            arch: aarch64
           # renovate:
-          - windows-11-arm
+          - runner: windows-11-arm
+            os: windows
+            arch: aarch64
           # renovate:
-          - windows-2025
+          - runner: windows-2025
+            os: windows
+            arch: x86-64
       fail-fast: false
-    runs-on: ${{ matrix.image }}
+    name: Build on ${{ matrix.runner }}
+    runs-on: ${{ matrix.runner }}
 
     steps:
       - name: Check out the repository
@@ -52,13 +63,19 @@ jobs:
         shell: pwsh
         run: cargo build --release
 
+      - name: Inspect the build directory
+        shell: pwsh
+        run: ls target/release
+
       - name: Upload the artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Mandelbrot.windows
+          name: Mandelbrot.${{ matrix.os }}.${{ matrix.arch }}
           path: |
+            target/release/Mandelbrot
             target/release/Mandelbrot.exe
             target/release/Mandelbrot.pdb
+          if-no-files-found: 'ignore'
 
   encoding:
     runs-on: ubuntu-24.04

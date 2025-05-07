@@ -21,7 +21,7 @@
             "customType": "regex",
             "fileMatch": ["^\\.github/workflows/.+\\.yml$"],
             "matchStrings": [
-                "# renovate:\\s*\\n\\s*- (?<depName>\\S+?)-(?<currentValue>\\S+)"
+                "# renovate:\\s*\\n\\s*- runner: (?<depName>\\S+?)-(?<currentValue>\\S+)"
             ],
             "datasourceTemplate": "github-runners"
         }
