@@ -16,7 +16,7 @@ of set, it will be drawn with black color.
 
 Installation
 ------------
-Download the latest version of the binaries from CI, or build from source (see [the contributor guide][docs.contributing] for details)
+Download the latest version of the binaries from CI, or build from source (see [the contributor guide][docs.contributing] for details).
 
 Starting the program
 --------------------
