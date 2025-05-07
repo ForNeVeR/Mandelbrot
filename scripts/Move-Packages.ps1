@@ -14,11 +14,11 @@ if (!(Test-Path $TargetPath)) {
     New-Item -Type Directory $TargetPath
 }
 
-$files = Get-ChildItem -Recurse "$SourcePath/**/*.zip"
-$files | ForEach-Object {
-    $archDir = [IO.Path]::GetDirectoryName($_)
+Get-Item "$SourcePath/*/*" | ForEach-Object {
+    $archDir = $_
     $osDir = [IO.Path]::GetDirectoryName($archDir)
     $arch = [IO.Path]::GetFileName($archDir)
     $os = [IO.Path]::GetFileName($osDir)
-    Move-Item -LiteralPath $_ "$TargetPath/mandelbrot.$os.$arch.zip"
+    $archiveName = "$TargetPath/mandelbrot.$os.$arch.zip"
+    Compress-Archive "$_/*" $archiveName
 }
