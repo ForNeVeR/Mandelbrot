@@ -70,12 +70,73 @@ jobs:
       - name: Upload the artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Mandelbrot.${{ matrix.os }}.${{ matrix.arch }}
+          name: mandelbrot.${{ matrix.os }}.${{ matrix.arch }}
           path: |
             target/release/Mandelbrot
             target/release/Mandelbrot.exe
             target/release/Mandelbrot.pdb
           if-no-files-found: 'ignore'
+
+  release:
+    runs-on: ubuntu-24.04
+    needs: [ build ]
+    steps:
+      - name: Check out the sources
+        uses: actions/checkout@v4
+
+      - name: Download macOS AArch64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: mandelbrot.macos.aarch64
+          path: ./tmp/macos/aarch64
+      - name: Download Linux AArch64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: mandelbrot.linux.aarch64
+          path: ./tmp/linux/aarch64
+      - name: Download Linux x86-64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: mandelbrot.linux.x86-64
+          path: ./tmp/linux/x86-64
+      - name: Download Windows AArch64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: mandelbrot.windows.aarch64
+          path: ./tmp/windows/aarch64
+      - name: Download Windows x86-64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: mandelbrot.windows.x86-64
+          path: ./tmp/windows/x86-64
+
+      - name: Move the packages
+        shell: pwsh
+        run: scripts/Move-Packages.ps1
+
+      - name: Prepare the release notes
+        uses: ForNeVeR/ChangelogAutomation.action@v2
+        with:
+          input: ./CHANGELOG.md
+          output: ./release-notes.md
+          format: Markdown
+      - name: Upload the release notes
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-notes
+          path: ./release-notes.md
+
+      - name: List the package directory contents
+        shell: pwsh
+        run: ls package
+      - name: Create release
+        if: startsWith(github.ref, 'refs/tags/v')
+        id: release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ./package/*.zip
+          body_path: ./release-notes.md
 
   encoding:
     runs-on: ubuntu-24.04

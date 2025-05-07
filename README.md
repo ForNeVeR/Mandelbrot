@@ -54,6 +54,7 @@ Default zoom position in selected for some interesting figures showing in it.
 Documentation
 -------------
 - [Contributor Guide][docs.contributing]
+- [Maintainer Guide][docs.maintainer-guide]
 
 License
 -------
@@ -63,5 +64,6 @@ The license indication in the project's sources is compliant with the [REUSE spe
 
 [docs.contributing]: CONTRIBUTING.md
 [docs.license]: LICENSES/MIT.txt
+[docs.maintainer-guide]: MAINTAINING.md
 [reuse.spec]: https://reuse.software/spec-3.3/
 [screenshot]: docs/screenshot.png
