@@ -16,7 +16,7 @@ of set, it will be drawn with black color.
 
 Installation
 ------------
-Download the latest version of the binaries from CI, or build from source (see [the contributor guide][docs.contributing] for details).
+Download the latest version from [the releases section][releases], or build from source (see [the contributor guide][docs.contributing] for details).
 
 Starting the program
 --------------------
@@ -65,5 +65,6 @@ The license indication in the project's sources is compliant with the [REUSE spe
 [docs.contributing]: CONTRIBUTING.md
 [docs.license]: LICENSES/MIT.txt
 [docs.maintainer-guide]: MAINTAINING.md
+[releases]: https://github.com/ForNeVeR/Mandelbrot/releases
 [reuse.spec]: https://reuse.software/spec-3.3/
 [screenshot]: docs/screenshot.png
