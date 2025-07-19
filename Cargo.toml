@@ -8,5 +8,5 @@ version = "1.0.0"
 edition = "2024"
 
 [dependencies]
-sdl2 = { version = "0.37.0", features = ["bundled", "static-link"] }
+sdl2 = { version = "0.38.0", features = ["bundled", "static-link"] }
 rayon = "1.10.0"
