@@ -63,6 +63,8 @@ jobs:
 
       - name: Build
         shell: pwsh
+        env:
+          CMAKE_POLICY_VERSION_MINIMUM: "3.5"
         run: cargo build --release
 
       - name: Inspect the build directory
