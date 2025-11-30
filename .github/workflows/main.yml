@@ -158,4 +158,4 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v6
       - name: REUSE license check
-        uses: fsfe/reuse-action@v5
+        uses: fsfe/reuse-action@v6
