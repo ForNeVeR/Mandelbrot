@@ -23,7 +23,7 @@ jobs:
       matrix:
         include:
           # renovate:
-          - runner: macos-15
+          - runner: macos-26
             os: macos
             arch: aarch64
           # renovate:
