@@ -27,11 +27,11 @@ jobs:
             os: macos
             arch: aarch64
           # renovate:
-          - runner: ubuntu-24.04
+          - runner: ubuntu-26.04
             os: linux
             arch: x86-64
           # renovate:
-          - runner: ubuntu-24.04-arm
+          - runner: ubuntu-26.04-arm
             os: linux
             arch: aarch64
           # renovate:
@@ -83,7 +83,7 @@ jobs:
           if-no-files-found: 'ignore'
 
   release:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: [ build ]
     steps:
       - name: Check out the sources
@@ -144,7 +144,7 @@ jobs:
           body_path: ./release-notes.md
 
   encoding:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Check out the repository
         uses: actions/checkout@v7
@@ -154,7 +154,7 @@ jobs:
         run: Install-Module VerifyEncoding -Repository PSGallery -RequiredVersion 2.2.0 -Force && Test-Encoding
 
   licenses:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Check out the repository
         uses: actions/checkout@v7
